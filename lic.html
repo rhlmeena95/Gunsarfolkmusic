@@ -3,105 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authorized LIC Advisor | Secure Your Future</title>
+    <title>Authorized LIC Advisor | Life Insurance & Financial Planning</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
             --lic-blue: #003366;
             --lic-yellow: #ffcc00;
+            --text-dark: #333;
         }
-        .navbar { background-color: var(--lic-blue); }
-        .hero-section {
-            background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80');
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--text-dark); }
+
+        /* Navigation */
+        .navbar { background-color: var(--lic-blue); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .navbar-brand { font-weight: bold; color: var(--lic-yellow) !important; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), 
+                        url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80');
             background-size: cover;
+            background-position: center;
             color: white;
-            padding: 100px 0;
+            padding: 120px 0;
+            text-align: center;
         }
-        .btn-primary { background-color: var(--lic-blue); border: none; }
-        .btn-warning { background-color: var(--lic-yellow); color: #000; font-weight: bold; }
-        .feature-card { border: none; transition: 0.3s; }
-        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* Gallery */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* Features/Plans */
+        .plan-card {
+            border: none;
+            border-bottom: 4px solid var(--lic-yellow);
+            transition: 0.3s;
+            background: #f8f9fa;
+        }
+        .plan-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .icon-box { color: var(--lic-blue); font-size: 2.5rem; margin-bottom: 15px; }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        footer { background-color: #111; color: #ccc; }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">LIC Advisor</a>
+            <a class="navbar-brand" href="#"><i class="fas fa-shield-alt"></i> LIC ADVISOR</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#plans">Insurance Plans</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#plans">Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-warning text-dark ms-lg-3 px-4" href="#contact">Get Quote</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header id="home" class="hero-section text-center">
+    <section id="home" class="hero">
         <div class="container">
-            <h1 class="display-4 fw-bold">Zindagi Ke Saath Bhi, Zindagi Ke Baad Bhi</h1>
-            <p class="lead">Providing reliable financial security for you and your loved ones.</p>
-            <a href="#contact" class="btn btn-warning btn-lg mt-3">Get a Free Consultation</a>
+            <h1 class="display-3 fw-bold mb-4">Secure Your Family's Future</h1>
+            <p class="lead mb-5">Trusted Life Insurance Corporation of India (LIC) Advisor providing customized wealth and protection solutions.</p>
+            <a href="#plans" class="btn btn-warning btn-lg px-5 py-3 fw-bold">Explore Plans</a>
         </div>
-    </header>
+    </section>
 
-    <section id="plans" class="py-5 bg-light">
+    <section id="plans" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Our Popular Insurance Plans</h2>
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Insurance Solutions</h2>
+                <div class="bg-warning mx-auto" style="height: 3px; width: 60px;"></div>
+            </div>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="card h-100 feature-card p-4">
-                        <h3>Term Assurance</h3>
-                        <p>High life cover at affordable premiums to protect your family's financial future.</p>
+                    <div class="card h-100 plan-card p-4 text-center">
+                        <div class="icon-box"><i class="fas fa-umbrella"></i></div>
+                        <h3>Term Insurance</h3>
+                        <p>High financial protection for your family at the lowest possible cost.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100 feature-card p-4">
-                        <h3>Pension Plans</h3>
-                        <p>Secure your retirement with a steady monthly income and financial independence.</p>
+                    <div class="card h-100 plan-card p-4 text-center">
+                        <div class="icon-box"><i class="fas fa-piggy-bank"></i></div>
+                        <h3>Money Back</h3>
+                        <p>Periodic returns during the policy term with life cover protection.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100 feature-card p-4">
-                        <h3>Children's Plans</h3>
-                        <p>Invest early to ensure your child's higher education and marriage are fully funded.</p>
+                    <div class="card h-100 plan-card p-4 text-center">
+                        <div class="icon-box"><i class="fas fa-graduation-cap"></i></div>
+                        <h3>Children's Education</h3>
+                        <p>Ensure your child's bright future even in your absence.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Our Gallery</h2>
+                <p class="text-muted">Glimpses of our services and client interactions</p>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4 col-6"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=400" alt="Finance"></div></div>
+                <div class="col-md-4 col-6"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1454165833767-027ffea9e778?q=80&w=400" alt="Policy"></div></div>
+                <div class="col-md-4 col-6"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=400" alt="Meeting"></div></div>
+                <div class="col-md-4 col-6"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=400" alt="Advice"></div></div>
+                <div class="col-md-4 col-6"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=400" alt="Agreement"></div></div>
+                <div class="col-md-4 col-6"><div class="gallery-item"><img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=400" alt="Success"></div></div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="py-5">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center">
-                    <h2 class="mb-4">Get a Quote</h2>
-                    <form>
-                        <input type="text" class="form-control mb-3" placeholder="Your Name" required>
-                        <input type="email" class="form-control mb-3" placeholder="Email Address" required>
-                        <input type="tel" class="form-control mb-3" placeholder="Phone Number" required>
-                        <select class="form-select mb-3">
-                            <option selected>Select Interest</option>
-                            <option>Life Insurance</option>
-                            <option>Investment Plan</option>
-                            <option>Health Insurance</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary w-100 py-2">Submit Request</button>
-                    </form>
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4">
+                    <h2 class="fw-bold">Get a Free Consultation</h2>
+                    <p>I help individuals and families find the right LIC plans tailored to their income and goals.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success me-2"></i> Authorized LIC Representative</li>
+                        <li><i class="fas fa-check text-success me-2"></i> Fast Claim Settlement Support</li>
+                        <li><i class="fas fa-check text-success me-2"></i> Free Policy Review Service</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow p-4">
+                        <form action="#" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Interested In</label>
+                                <select class="form-select">
+                                    <option>Term Life Insurance</option>
+                                    <option>Pension/Retirement Plan</option>
+                                    <option>Child Plan</option>
+                                    <option>Savings & Investment</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2">Submit Request</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-dark text-white py-4 text-center">
-        <p>&copy; 2024 Licensed LIC Agent. All Rights Reserved.</p>
-        <p><small>Insurance is the subject matter of solicitation.</small></p>
+    <footer class="py-5 text-center">
+        <div class="container">
+            <p class="mb-1">Licensed Insurance Advisor - Life Insurance Corporation of India</p>
+            <p class="small text-muted mb-4">Insurance is the subject matter of solicitation. | &copy; 2026</p>
+            <div class="social-links">
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+        </div>
     </footer>
+
+    <a href="https://wa.me/911234567890" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+    </html>
+                                             
