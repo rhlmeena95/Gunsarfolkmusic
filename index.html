@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gunsar Folk Music — The Soul of Rajasthan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --saffron: #E8841A;
+    --deep-saffron: #C4600A;
+    --terracotta: #B5451B;
+    --cream: #FAF3E0;
+    --warm-cream: #F5E6C8;
+    --dark-wood: #2C1810;
+    --medium-wood: #4A2C1A;
+    --gold: #D4A017;
+    --light-gold: #F0C040;
+    --text-dark: #1A0E08;
+    --text-medium: #4A3020;
+    --pattern-color: rgba(232,132,26,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Text', serif;
+    background-color: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND PATTERN ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, var(--pattern-color) 2px, transparent 2px),
+      radial-gradient(circle at 80% 80%, var(--pattern-color) 2px, transparent 2px),
+      radial-gradient(circle at 50% 50%, var(--pattern-color) 1px, transparent 1px);
+    background-size: 60px 60px, 60px 60px, 30px 30px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--dark-wood);
+    border-bottom: 3px solid var(--saffron);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    height: 70px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--light-gold);
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .nav-logo span { color: var(--saffron); }
+
+  .nav-links {
+    display: flex; gap: 6px; align-items: center;
+    list-style: none;
+  }
+
+  .nav-links li a {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--warm-cream);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 2px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    color: var(--light-gold);
+    background: rgba(232,132,26,0.15);
+  }
+
+  .nav-admin-btn {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .nav-admin-btn:hover { background: var(--deep-saffron); }
+
+  /* ── HAMBURGER ── */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--light-gold); transition: 0.3s; }
+
+  /* ── PAGES ── */
+  .page { display: none; min-height: 100vh; padding-top: 70px; position: relative; z-index: 1; }
+  .page.active { display: block; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--dark-wood);
+    text-align: center;
+    margin-bottom: 0.4em;
+  }
+
+  .section-title span { color: var(--saffron); }
+
+  .section-subtitle {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .divider {
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    margin: 0 auto 3rem;
+    border-radius: 2px;
+  }
+
+  /* ══════════════════════
+     HOME PAGE
+  ══════════════════════ */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(135deg, rgba(44,24,16,0.92) 0%, rgba(74,44,26,0.85) 50%, rgba(232,132,26,0.2) 100%),
+      url('https://images.unsplash.com/photo-1593351415075-3bac9f45c877?w=1600&q=80') center/cover no-repeat;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 60px 20px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(232,132,26,0.03) 40px, rgba(232,132,26,0.03) 41px
+    );
+  }
+
+  .hero-badge {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem; letter-spacing: 6px; text-transform: uppercase;
+    color: var(--light-gold); border: 1px solid var(--gold);
+    padding: 6px 20px; margin-bottom: 2rem;
+    animation: fadeInDown 1s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900; line-height: 1;
+    color: var(--cream);
+    margin-bottom: 0.3em;
+    animation: fadeInUp 1s ease 0.2s both;
+  }
+
+  .hero h1 em { color: var(--light-gold); font-style: italic; }
+
+  .hero-tagline {
+    font-family: 'Crimson Text', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--warm-cream);
+    opacity: 0.9; max-width: 600px;
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease 0.4s both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    animation: fadeInUp 1s ease 0.6s both;
+  }
+
+  .btn-primary {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    background: var(--saffron); color: white;
+    border: none; padding: 14px 32px; cursor: pointer;
+    transition: all 0.3s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .btn-primary:hover { background: var(--deep-saffron); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,132,26,0.4); }
+
+  .btn-outline {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    background: transparent; color: var(--light-gold);
+    border: 1px solid var(--gold); padding: 14px 32px; cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover { background: rgba(212,160,23,0.15); transform: translateY(-2px); }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute; bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: fadeInUp 1s ease 1s both;
+  }
+  .scroll-indicator span {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: var(--warm-cream); opacity: 0.6;
+  }
+  .scroll-line { width: 1px; height: 40px; background: var(--gold); animation: scrollPulse 2s infinite; }
+
+  /* Features strip */
+  .features-strip {
+    background: var(--dark-wood);
+    padding: 50px 40px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px; border-top: 3px solid var(--saffron);
+  }
+
+  .feature-item {
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid rgba(232,132,26,0.2);
+    transition: border-color 0.3s;
+  }
+  .feature-item:hover { border-color: var(--saffron); }
+
+  .feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .feature-item h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--light-gold); font-size: 1.2rem; margin-bottom: 0.5rem;
+  }
+
+  .feature-item p {
+    font-family: 'Crimson Text', serif;
+    color: var(--warm-cream); opacity: 0.75; font-size: 0.95rem; line-height: 1.6;
+  }
+
+  /* Highlight section */
+  .highlight-section {
+    padding: 100px 40px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; max-width: 1200px; margin: 0 auto;
+    align-items: center;
+  }
+
+  .highlight-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--dark-wood); margin-bottom: 1.2rem; line-height: 1.2;
+  }
+
+  .highlight-text h2 span { color: var(--saffron); }
+
+  .highlight-text p {
+    font-size: 1.15rem; line-height: 1.8; color: var(--text-medium); margin-bottom: 1rem;
+  }
+
+  .highlight-img {
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .highlight-img img {
+    width: 100%; height: 400px; object-fit: cover;
+    border: 4px solid var(--warm-cream);
+    outline: 2px solid var(--saffron);
+    outline-offset: 8px;
+    transition: transform 0.5s;
+  }
+
+  .highlight-img:hover img { transform: scale(1.03); }
+
+  /* Stats strip */
+  .stats-strip {
+    background: linear-gradient(135deg, var(--terracotta), var(--saffron));
+    padding: 60px 40px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 20px; text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900; color: white; line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.8); margin-top: 6px;
+  }
+
+  /* Upcoming events */
+  .events-section {
+    padding: 80px 40px; max-width: 1100px; margin: 0 auto;
+  }
+
+  .event-card {
+    display: flex; align-items: center; gap: 30px;
+    background: white; border-left: 4px solid var(--saffron);
+    padding: 24px 30px; margin-bottom: 20px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .event-card:hover { transform: translateX(8px); box-shadow: 0 4px 25px rgba(0,0,0,0.12); }
+
+  .event-date-box {
+    text-align: center; min-width: 70px;
+    background: var(--dark-wood); padding: 10px;
+    color: white;
+  }
+
+  .event-date-day { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+  .event-date-month { font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--light-gold); }
+
+  .event-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 4px; }
+  .event-info p { font-size: 0.95rem; color: var(--text-medium); }
+  .event-info .event-loc { color: var(--saffron); font-size: 0.85rem; margin-top: 4px; }
+
+  /* ══════════════════════
+     ABOUT PAGE
+  ══════════════════════ */
+  .about-hero {
+    background: linear-gradient(135deg, var(--dark-wood) 60%, var(--medium-wood)),
+    padding: 100px 40px 60px;
+    text-align: center;
+    background: var(--dark-wood);
+  }
+
+  .about-hero-inner {
+    padding: 80px 40px 60px;
+    background: linear-gradient(180deg, var(--dark-wood) 0%, var(--medium-wood) 100%);
+    text-align: center;
+  }
+
+  .about-hero-inner h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: var(--cream); margin-bottom: 1rem;
+  }
+
+  .about-hero-inner p {
+    font-size: 1.2rem; color: var(--warm-cream); opacity: 0.8;
+    max-width: 600px; margin: 0 auto; line-height: 1.7;
+  }
+
+  .about-content {
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: start;
+  }
+
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--dark-wood); margin-bottom: 1rem;
+  }
+  .about-text h2 span { color: var(--saffron); }
+  .about-text p { line-height: 1.85; color: var(--text-medium); font-size: 1.08rem; margin-bottom: 1.2rem; }
+
+  .team-grid {
+    max-width: 1100px; margin: 0 auto; padding: 0 40px 80px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+  }
+
+  .team-card {
+    background: white; text-align: center; padding: 30px 20px;
+    border-bottom: 3px solid var(--saffron);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.07);
+    transition: transform 0.3s;
+  }
+  .team-card:hover { transform: translateY(-6px); }
+
+  .team-avatar {
+    width: 90px; height: 90px; border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--saffron);
+    margin: 0 auto 1rem;
+    background: var(--warm-cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+  }
+
+  .team-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 4px; }
+  .team-card p { font-size: 0.85rem; color: var(--saffron); font-family: 'Josefin Sans', sans-serif; letter-spacing: 1px; }
+
+  /* ══════════════════════
+     PROGRAM PAGE
+  ══════════════════════ */
+  .program-hero-inner {
+    padding: 80px 40px 60px;
+    background: linear-gradient(135deg, var(--terracotta) 0%, var(--dark-wood) 100%);
+    text-align: center;
+  }
+
+  .program-hero-inner h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: var(--cream);
+  }
+
+  .programs-grid {
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 40px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .program-card {
+    background: white;
+    border-top: 4px solid var(--saffron);
+    padding: 40px 30px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+
+  .program-card::before {
+    content: '';
+    position: absolute; top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: var(--warm-cream);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .program-card:hover { transform: translateY(-8px); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+
+  .prog-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .program-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; margin-bottom: 0.8rem; color: var(--dark-wood);
+  }
+
+  .program-card p { color: var(--text-medium); line-height: 1.7; font-size: 1rem; }
+
+  .prog-tag {
+    display: inline-block; margin-top: 1rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+    background: var(--warm-cream); color: var(--saffron);
+    padding: 4px 12px; border: 1px solid var(--saffron);
+  }
+
+  .schedule-section {
+    background: var(--dark-wood); padding: 80px 40px;
+  }
+
+  .schedule-table {
+    max-width: 900px; margin: 0 auto;
+    width: 100%; border-collapse: collapse;
+    background: var(--medium-wood);
+  }
+
+  .schedule-table th {
+    background: var(--saffron); color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 16px 20px; text-align: left;
+  }
+
+  .schedule-table td {
+    padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: var(--warm-cream); font-size: 1rem;
+  }
+
+  .schedule-table tr:hover td { background: rgba(232,132,26,0.1); }
+
+  /* ══════════════════════
+     GALLERY PAGE
+  ══════════════════════ */
+  .gallery-hero-inner {
+    padding: 80px 40px 60px;
+    background: linear-gradient(135deg, var(--medium-wood) 0%, var(--terracotta) 100%);
+    text-align: center;
+  }
+
+  .gallery-hero-inner h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: var(--cream);
+  }
+
+  .gallery-filters {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
+    padding: 40px 20px 20px;
+  }
+
+  .filter-btn {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    background: transparent; color: var(--text-dark);
+    border: 1px solid var(--saffron); padding: 8px 20px; cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--saffron); color: white;
+  }
+
+  .gallery-grid {
+    max-width: 1300px; margin: 0 auto;
+    padding: 20px 30px 80px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .gallery-item {
+    position: relative; overflow: hidden; cursor: pointer;
+    border-radius: 2px;
+    aspect-ratio: 4/3;
+    background: var(--warm-cream);
+  }
+
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .gallery-item:hover img { transform: scale(1.08); }
+
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(44,24,16,0.85) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 20px;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-overlay span {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 1rem;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.95);
+    display: none; align-items: center; justify-content: center;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw; max-height: 85vh; object-fit: contain;
+    border: 2px solid var(--saffron);
+  }
+
+  .lightbox-close {
+    position: absolute; top: 20px; right: 30px;
+    color: white; font-size: 2.5rem; cursor: pointer; line-height: 1;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: var(--saffron); }
+
+  .lightbox-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    color: white; font-size: 2rem; cursor: pointer;
+    background: rgba(232,132,26,0.3); width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-nav:hover { background: var(--saffron); }
+  .lightbox-prev { left: 20px; }
+  .lightbox-next { right: 20px; }
+
+  /* ══════════════════════
+     VIDEOS PAGE
+  ══════════════════════ */
+  .videos-hero-inner {
+    padding: 80px 40px 60px;
+    background: linear-gradient(135deg, #1A0E08 0%, var(--terracotta) 100%);
+    text-align: center;
+  }
+
+  .videos-hero-inner h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: var(--cream);
+  }
+
+  .videos-grid {
+    max-width: 1300px; margin: 0 auto;
+    padding: 60px 30px 80px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .video-card {
+    background: white;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .video-card:hover { transform: translateY(-6px); box-shadow: 0 10px 35px rgba(0,0,0,0.18); }
+
+  .video-thumb {
+    position: relative; aspect-ratio: 16/9; overflow: hidden;
+    background: var(--dark-wood);
+    cursor: pointer;
+  }
+
+  .video-thumb iframe {
+    width: 100%; height: 100%; border: none;
+  }
+
+  .video-thumb-img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s;
+  }
+
+  .video-thumb:hover .video-thumb-img { transform: scale(1.05); }
+
+  .play-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; height: 60px; border-radius: 50%;
+    background: rgba(232,132,26,0.9);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; color: white;
+    transition: all 0.3s; cursor: pointer;
+  }
+
+  .video-thumb:hover .play-btn { background: var(--saffron); transform: translate(-50%, -50%) scale(1.1); }
+
+  .video-info { padding: 20px; }
+  .video-info h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 6px; }
+  .video-info p { font-size: 0.9rem; color: var(--text-medium); line-height: 1.5; }
+  .video-info .video-tag {
+    display: inline-block; margin-top: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+    background: var(--warm-cream); color: var(--saffron);
+    padding: 3px 10px;
+  }
+
+  /* Video modal */
+  .video-modal {
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.96);
+    display: none; align-items: center; justify-content: center;
+  }
+  .video-modal.open { display: flex; }
+  .video-modal-inner { position: relative; width: min(900px, 95vw); }
+  .video-modal-inner iframe { width: 100%; aspect-ratio: 16/9; border: 2px solid var(--saffron); }
+  .video-modal-close {
+    position: absolute; top: -40px; right: 0;
+    color: white; font-size: 1.8rem; cursor: pointer;
+    transition: color 0.2s;
+  }
+  .video-modal-close:hover { color: var(--saffron); }
+
+  /* ══════════════════════
+     ADMIN PANEL
+  ══════════════════════ */
+  .admin-login {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--dark-wood);
+    padding: 20px;
+  }
+
+  .login-box {
+    background: var(--medium-wood);
+    border: 1px solid var(--saffron);
+    padding: 50px 40px; max-width: 400px; width: 100%;
+    text-align: center;
+  }
+
+  .login-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--light-gold); font-size: 1.8rem; margin-bottom: 2rem;
+  }
+
+  .login-box input {
+    width: 100%; padding: 12px 16px; margin-bottom: 16px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: white; font-family: 'Josefin Sans', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.3s;
+  }
+
+  .login-box input:focus { border-color: var(--saffron); }
+  .login-box input::placeholder { color: rgba(255,255,255,0.4); }
+
+  .login-error { color: #ff6b6b; font-size: 0.85rem; margin-bottom: 10px; }
+
+  /* Admin dashboard */
+  .admin-dash {
+    padding-top: 70px; min-height: 100vh;
+    background: #f8f4ee;
+  }
+
+  .admin-header {
+    background: var(--dark-wood);
+    padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 2px solid var(--saffron);
+  }
+
+  .admin-header h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--light-gold); font-size: 1.4rem;
+  }
+
+  .admin-tabs {
+    display: flex; gap: 4px; padding: 20px 30px 0;
+    border-bottom: 2px solid var(--saffron);
+    background: white;
+  }
+
+  .admin-tab {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 10px 24px; cursor: pointer;
+    border: none; background: transparent;
+    color: var(--text-medium);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .admin-tab.active {
+    color: var(--saffron); border-bottom-color: var(--saffron);
+    background: rgba(232,132,26,0.05);
+  }
+
+  .admin-panel-content { padding: 30px; }
+
+  .admin-section { display: none; }
+  .admin-section.active { display: block; }
+
+  .admin-add-form {
+    background: white; padding: 30px; margin-bottom: 30px;
+    border-top: 3px solid var(--saffron);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+
+  .admin-add-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; margin-bottom: 1.2rem; color: var(--dark-wood);
+  }
+
+  .form-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+
+  .form-group { flex: 1; min-width: 200px; }
+
+  .form-group label {
+    display: block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-medium); margin-bottom: 6px;
+  }
+
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 10px 14px;
+    border: 1px solid #ddd; background: #fafafa;
+    font-family: 'Crimson Text', serif; font-size: 1rem;
+    outline: none; transition: border-color 0.3s;
+    color: var(--text-dark);
+  }
+
+  .form-group input:focus, .form-group select:focus { border-color: var(--saffron); }
+
+  .admin-items-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .admin-item {
+    background: white; overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: relative; border-radius: 2px;
+  }
+
+  .admin-item img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover;
+  }
+
+  .admin-item-info { padding: 12px; }
+  .admin-item-info p { font-size: 0.9rem; color: var(--text-medium); margin-bottom: 8px; font-weight: 600; }
+
+  .btn-delete {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase;
+    background: #e74c3c; color: white;
+    border: none; padding: 6px 14px; cursor: pointer;
+    transition: background 0.2s; border-radius: 2px;
+  }
+  .btn-delete:hover { background: #c0392b; }
+
+  .btn-add-submit {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    background: var(--saffron); color: white;
+    border: none; padding: 12px 28px; cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-add-submit:hover { background: var(--deep-saffron); }
+
+  .admin-video-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .admin-video-item {
+    background: white; padding: 16px 20px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .admin-video-thumb {
+    width: 120px; height: 68px; object-fit: cover;
+    background: var(--dark-wood); flex-shrink: 0;
+  }
+
+  .admin-video-info { flex: 1; }
+  .admin-video-info strong { font-family: 'Playfair Display', serif; display: block; margin-bottom: 3px; }
+  .admin-video-info small { color: var(--text-medium); font-size: 0.85rem; }
+
+  .logout-btn {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    background: transparent; color: var(--light-gold);
+    border: 1px solid var(--gold); padding: 8px 18px; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .logout-btn:hover { background: rgba(212,160,23,0.15); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark-wood);
+    border-top: 3px solid var(--saffron);
+    padding: 60px 40px 30px;
+  }
+
+  .footer-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px; margin-bottom: 40px;
+  }
+
+  .footer-brand h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--light-gold); font-size: 1.5rem; margin-bottom: 1rem;
+  }
+
+  .footer-brand p { color: var(--warm-cream); opacity: 0.7; line-height: 1.7; font-size: 0.95rem; }
+
+  .footer-col h4 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--saffron); margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a {
+    color: var(--warm-cream); opacity: 0.7; text-decoration: none;
+    font-size: 0.95rem; cursor: pointer; transition: opacity 0.2s;
+  }
+  .footer-col ul li a:hover { opacity: 1; color: var(--light-gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .footer-bottom p { color: var(--warm-cream); opacity: 0.5; font-size: 0.85rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollPulse { 0%,100% { opacity: 1; transform: scaleY(1); } 50% { opacity: 0.3; transform: scaleY(0.6); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .highlight-section { grid-template-columns: 1fr; gap: 40px; }
+    .about-content { grid-template-columns: 1fr; gap: 30px; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; background: var(--dark-wood); flex-direction: column; gap: 0; padding: 10px 0; border-bottom: 2px solid var(--saffron); }
+    .nav-links.open { display: flex; }
+    .nav-links li a { padding: 12px 24px; display: block; }
+    .nav-admin-btn { display: none; }
+    .hamburger { display: flex; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .videos-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.8rem; }
+    .admin-tabs { overflow-x: auto; }
+    .form-row { flex-direction: column; }
+  }
+
+  /* Utility */
+  .empty-msg {
+    text-align: center; padding: 60px 20px;
+    color: var(--text-medium); font-size: 1.1rem; opacity: 0.6;
+    grid-column: 1/-1;
+  }
+
+  .toast {
+    position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+    background: var(--dark-wood); color: var(--light-gold);
+    border-left: 4px solid var(--saffron);
+    padding: 14px 24px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.8rem; letter-spacing: 1px;
+    transform: translateX(120%); transition: transform 0.4s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .toast.show { transform: translateX(0); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    🎵 <span>Gunsar</span> Folk Music
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('program')" id="nav-program">Program</a></li>
+    <li><a onclick="showPage('gallery')" id="nav-gallery">Gallery</a></li>
+    <li><a onclick="showPage('videos')" id="nav-videos">Videos</a></li>
+  </ul>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <button class="nav-admin-btn" onclick="showPage('admin')">⚙ Admin</button>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">Est. 1998 · Rajasthan, India</div>
+    <h1>The Soul of<br/><em>Folk Music</em></h1>
+    <p class="hero-tagline">Celebrating the rich, living traditions of Rajasthani folk music — passed down through generations, performed for the world.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('program')">Explore Programs</button>
+      <button class="btn-outline" onclick="showPage('videos')">Watch Performances</button>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="features-strip">
+    <div class="feature-item">
+      <div class="feature-icon">🥁</div>
+      <h3>Live Performances</h3>
+      <p>Experience the raw energy of Rajasthani folk music performed live at festivals and cultural events.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🎶</div>
+      <h3>Music Education</h3>
+      <p>Learn traditional instruments like Dholak, Sarangi, Morchang, and the art of folk singing.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🪔</div>
+      <h3>Cultural Heritage</h3>
+      <p>Preserving centuries-old traditions of Manganiyar, Langa, and Bhopa folk music communities.</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🌐</div>
+      <h3>Global Outreach</h3>
+      <p>Taking the desert melodies of Rajasthan to international stages across Europe, Asia, and beyond.</p>
+    </div>
+  </div>
+
+  <div class="highlight-section">
+    <div class="highlight-text">
+      <h2>Where Desert Winds<br/><span>Carry Ancient Melodies</span></h2>
+      <p>Gunsar Folk Music is a cultural organization dedicated to the preservation and promotion of the rich folk music traditions of Rajasthan. Born in the dunes of Barmer and Jaisalmer, our music tells stories of love, valor, devotion, and the eternal bond between humans and nature.</p>
+      <p>From the soulful notes of the Sarangi to the rhythmic beats of the Dholak, every performance is a journey through centuries of oral tradition — vibrant, living, and deeply moving.</p>
+      <button class="btn-primary" onclick="showPage('about')" style="margin-top:1rem;">Our Story →</button>
+    </div>
+    <div class="highlight-img">
+      <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=700&q=80" alt="Rajasthani Folk Music"/>
+    </div>
+  </div>
+
+  <div class="stats-strip">
+    <div>
+      <div class="stat-num">25+</div>
+      <div class="stat-label">Years of Heritage</div>
+    </div>
+    <div>
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Performances</div>
+    </div>
+    <div>
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Countries Toured</div>
+    </div>
+    <div>
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Artists</div>
+    </div>
+  </div>
+
+  <div class="events-section">
+    <p class="section-subtitle">Mark Your Calendar</p>
+    <h2 class="section-title">Upcoming <span>Events</span></h2>
+    <div class="divider"></div>
+    <div class="event-card">
+      <div class="event-date-box">
+        <div class="event-date-day">15</div>
+        <div class="event-date-month">Apr</div>
+      </div>
+      <div class="event-info">
+        <h3>Rajasthan Folk Festival 2026</h3>
+        <p>A grand celebration of folk music traditions from across the desert state</p>
+        <p class="event-loc">📍 Mehrangarh Fort, Jodhpur</p>
+      </div>
+    </div>
+    <div class="event-card">
+      <div class="event-date-box">
+        <div class="event-date-day">3</div>
+        <div class="event-date-month">May</div>
+      </div>
+      <div class="event-info">
+        <h3>Desert Melody Night</h3>
+        <p>An intimate evening of Manganiyar and Langa folk music under the open sky</p>
+        <p class="event-loc">📍 Sam Sand Dunes, Jaisalmer</p>
+      </div>
+    </div>
+    <div class="event-card">
+      <div class="event-date-box">
+        <div class="event-date-day">20</div>
+        <div class="event-date-month">Jun</div>
+      </div>
+      <div class="event-info">
+        <h3>International Folk Music Summit</h3>
+        <p>Gunsar Folk Music represents Rajasthan at the global cultural exchange</p>
+        <p class="event-loc">📍 New Delhi Cultural Centre</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>🎵 Gunsar Folk Music</h3>
+        <p>Dedicated to preserving and sharing the timeless folk traditions of Rajasthan with the world. Music is our heritage, culture is our identity.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a onclick="showPage('home')">Home</a></li>
+          <li><a onclick="showPage('about')">About Us</a></li>
+          <li><a onclick="showPage('program')">Programs</a></li>
+          <li><a onclick="showPage('gallery')">Gallery</a></li>
+          <li><a onclick="showPage('videos')">Videos</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a>📧 info@gunsarfolkmusic.com</a></li>
+          <li><a>📞 +91 98765 43210</a></li>
+          <li><a>📍 Barmer, Rajasthan, India</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Gunsar Folk Music. All Rights Reserved.</p>
+      <p>Crafted with ❤️ for Rajasthani Culture</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════ ABOUT PAGE ═══════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero-inner">
+    <p class="section-subtitle" style="color:var(--light-gold);margin-bottom:1rem;">Who We Are</p>
+    <h1>Our <em style="color:var(--light-gold)">Story</em></h1>
+    <p style="color:var(--warm-cream);opacity:0.8;max-width:600px;margin:1rem auto 0;font-size:1.15rem;line-height:1.7;">Born in the dunes, carried by desert winds, heard across the world.</p>
+  </div>
+
+  <div class="about-content">
+    <div class="about-text">
+      <h2>The <span>Gunsar</span> Legacy</h2>
+      <p>Founded in 1998 in the village of Gunsar, Barmer district, our organization was born from a simple but powerful belief: that the folk music of Rajasthan is not just entertainment — it is a living archive of our people's soul, history, and spirit.</p>
+      <p>The name "Gunsar" means "essence of qualities" in the local dialect — and that is precisely what we seek to capture and share. Over the past 25 years, we have grown from a small community gathering into an internationally recognized cultural institution.</p>
+      <p>We work directly with master musicians from the Manganiyar, Langa, and Bhopa communities, ensuring that their traditions receive the respect, documentation, and global platform they deserve.</p>
+      <button class="btn-primary" onclick="showPage('program')" style="margin-top:1rem;">See Our Programs →</button>
+    </div>
+    <div class="about-text">
+      <h2>Our <span>Mission</span></h2>
+      <p>We believe every folk melody carries a story — of monsoon rains on desert sand, of campfires under starlit skies, of love found and lost across endless dunes.</p>
+      <p>Our mission is threefold: <strong>Preserve</strong> by documenting and archiving traditional compositions; <strong>Promote</strong> by bringing folk music to national and international audiences; and <strong>Pass On</strong> by educating the next generation in these ancient arts.</p>
+      <p>Through concerts, workshops, recordings, and digital outreach, we ensure that the music of Rajasthan's desert communities continues to resonate for centuries to come.</p>
+    </div>
+  </div>
+
+  <div style="padding: 0 40px 40px; text-align: center;">
+    <p class="section-subtitle">The People Behind the Music</p>
+    <h2 class="section-title">Meet Our <span>Artists</span></h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">🎵</div>
+      <h3>Ustad Ramzan Khan</h3>
+      <p>Manganiyar Vocalist</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">🥁</div>
+      <h3>Bhura Langa</h3>
+      <p>Dholak Maestro</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">🎶</div>
+      <h3>Suwa Devi</h3>
+      <p>Folk Vocalist & Dancer</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">🪘</div>
+      <h3>Pappu Khan</h3>
+      <p>Sarangi Virtuoso</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">🎸</div>
+      <h3>Hamira Bhopa</h3>
+      <p>Ravanhatta Player</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">🌺</div>
+      <h3>Leela Devi</h3>
+      <p>Traditional Ghoomar</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>🎵 Gunsar Folk Music</h3><p>Dedicated to preserving and sharing the timeless folk traditions of Rajasthan with the world.</p></div>
+      <div class="footer-col"><h4>Navigate</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('program')">Programs</a></li><li><a onclick="showPage('gallery')">Gallery</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a>📧 info@gunsarfolkmusic.com</a></li><li><a>📞 +91 98765 43210</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Gunsar Folk Music. All Rights Reserved.</p></div>
+  </footer>
+</div>
+
+<!-- ═══════════════ PROGRAM PAGE ═══════════════ -->
+<div class="page" id="page-program">
+  <div class="program-hero-inner">
+    <p class="section-subtitle" style="color:var(--light-gold);margin-bottom:1rem;">What We Offer</p>
+    <h1 style="color:var(--cream);">Our <em style="color:var(--light-gold);">Programs</em></h1>
+  </div>
+
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="prog-icon">🎤</div>
+      <h3>Live Concerts</h3>
+      <p>Full-scale performances featuring our ensemble of 15–30 artists. We perform at cultural festivals, royal palaces, heritage hotels, and international stages, bringing the complete spectacle of Rajasthani folk to life.</p>
+      <span class="prog-tag">Performances</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">🎓</div>
+      <h3>Music Workshops</h3>
+      <p>Hands-on learning sessions where participants can learn to play traditional instruments like Dholak, Khartal, Morchang, and Algoza under the guidance of master folk musicians from Rajasthan.</p>
+      <span class="prog-tag">Education</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">🏕️</div>
+      <h3>Desert Evenings</h3>
+      <p>Intimate folk music evenings in the desert, held at sunset or under stars. These exclusive experiences are curated for small groups, offering an unforgettable connection with the Thar landscape and its music.</p>
+      <span class="prog-tag">Experience</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">📚</div>
+      <h3>Cultural Documentation</h3>
+      <p>We actively document rare folk compositions, oral histories, and musical traditions through audio-visual recordings in collaboration with cultural institutions and universities worldwide.</p>
+      <span class="prog-tag">Heritage</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">🌍</div>
+      <h3>International Tours</h3>
+      <p>Gunsar Folk Music has toured over 30 countries, performing at prestigious venues in Europe, Japan, North America, and the Middle East — always carrying the authentic spirit of Rajasthan.</p>
+      <span class="prog-tag">Global</span>
+    </div>
+    <div class="program-card">
+      <div class="prog-icon">👶</div>
+      <h3>Youth Training Program</h3>
+      <p>A dedicated program for young musicians aged 10–25, teaching traditional instruments, folk compositions, and the cultural context of Rajasthani music to ensure generational continuity.</p>
+      <span class="prog-tag">Youth</span>
+    </div>
+  </div>
+
+  <div class="schedule-section">
+    <p class="section-subtitle" style="color:var(--light-gold);">2026 Season</p>
+    <h2 class="section-title" style="color:var(--cream);">Performance <span>Schedule</span></h2>
+    <div class="divider"></div>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Event</th>
+          <th>Venue</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>15 Apr 2026</td><td>Rajasthan Folk Festival</td><td>Mehrangarh Fort, Jodhpur</td><td>Concert</td></tr>
+        <tr><td>3 May 2026</td><td>Desert Melody Night</td><td>Sam Dunes, Jaisalmer</td><td>Desert Evening</td></tr>
+        <tr><td>20 Jun 2026</td><td>International Folk Summit</td><td>New Delhi Cultural Centre</td><td>International</td></tr>
+        <tr><td>12 Jul 2026</td><td>Monsoon Raga Festival</td><td>City Palace, Udaipur</td><td>Concert</td></tr>
+        <tr><td>8 Aug 2026</td><td>Folk Music Workshop</td><td>Barmer Cultural Hall</td><td>Workshop</td></tr>
+        <tr><td>18 Sep 2026</td><td>Europe Folk Tour – Berlin</td><td>Philharmonie, Berlin</td><td>International Tour</td></tr>
+        <tr><td>5 Oct 2026</td><td>Pushkar Fair Performances</td><td>Pushkar, Rajasthan</td><td>Festival</td></tr>
+        <tr><td>14 Nov 2026</td><td>Youth Training Showcase</td><td>Gunsar Village, Barmer</td><td>Youth Program</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>🎵 Gunsar Folk Music</h3><p>Dedicated to preserving and sharing the timeless folk traditions of Rajasthan.</p></div>
+      <div class="footer-col"><h4>Navigate</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('about')">About</a></li><li><a onclick="showPage('gallery')">Gallery</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a>📧 info@gunsarfolkmusic.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Gunsar Folk Music. All Rights Reserved.</p></div>
+  </footer>
+</div>
+
+<!-- ═══════════════ GALLERY PAGE ═══════════════ -->
+<div class="page" id="page-gallery">
+  <div class="gallery-hero-inner">
+    <p class="section-subtitle" style="color:var(--light-gold);margin-bottom:1rem;">Visual Journey</p>
+    <h1 style="color:var(--cream);">Photo <em style="color:var(--light-gold);">Gallery</em></h1>
+  </div>
+
+  <div class="gallery-filters">
+    <button class="filter-btn active" onclick="filterGallery('all',this)">All Photos</button>
+    <button class="filter-btn" onclick="filterGallery('performance',this)">Performances</button>
+    <button class="filter-btn" onclick="filterGallery('festival',this)">Festivals</button>
+    <button class="filter-btn" onclick="filterGallery('culture',this)">Culture</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid"></div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>🎵 Gunsar Folk Music</h3><p>Dedicated to preserving and sharing the timeless folk traditions of Rajasthan.</p></div>
+      <div class="footer-col"><h4>Navigate</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('about')">About</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a>📧 info@gunsarfolkmusic.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Gunsar Folk Music. All Rights Reserved.</p></div>
+  </footer>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <div class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">‹</div>
+  <img id="lightboxImg" src="" alt=""/>
+  <div class="lightbox-nav lightbox-next" onclick="navLightbox(1)">›</div>
+</div>
+
+<!-- ═══════════════ VIDEOS PAGE ═══════════════ -->
+<div class="page" id="page-videos">
+  <div class="videos-hero-inner">
+    <p class="section-subtitle" style="color:var(--light-gold);margin-bottom:1rem;">Watch & Listen</p>
+    <h1 style="color:var(--cream);">Video <em style="color:var(--light-gold);">Library</em></h1>
+  </div>
+
+  <div class="videos-grid" id="videosGrid"></div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>🎵 Gunsar Folk Music</h3><p>Dedicated to preserving and sharing the timeless folk traditions of Rajasthan.</p></div>
+      <div class="footer-col"><h4>Navigate</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('gallery')">Gallery</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a>📧 info@gunsarfolkmusic.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Gunsar Folk Music. All Rights Reserved.</p></div>
+  </footer>
+</div>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-inner">
+    <span class="video-modal-close" onclick="closeVideoModal()">×</span>
+    <iframe id="videoModalFrame" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- ═══════════════ ADMIN PAGE ═══════════════ -->
+<div class="page" id="page-admin">
+  <!-- Login -->
+  <div class="admin-login" id="adminLogin">
+    <div class="login-box">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🔐</div>
+      <h2>Admin Panel</h2>
+      <p style="color:var(--warm-cream);opacity:0.6;font-size:0.9rem;margin-bottom:2rem;">Gunsar Folk Music Management</p>
+      <div id="loginError" class="login-error" style="display:none;">Incorrect credentials. Try again.</div>
+      <input type="text" id="adminUser" placeholder="Username" autocomplete="off"/>
+      <input type="password" id="adminPass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="btn-add-submit" style="width:100%;margin-top:6px;" onclick="doLogin()">LOGIN</button>
+      <p style="color:rgba(255,255,255,0.3);font-size:0.75rem;margin-top:20px;">Default: admin / gunsar2026</p>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="admin-dash" id="adminDash" style="display:none;">
+    <div class="admin-header">
+      <h2>🎵 Admin Dashboard</h2>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('gallery',this)">📷 Gallery Photos</button>
+      <button class="admin-tab" onclick="switchAdminTab('videos',this)">🎬 Videos</button>
+    </div>
+
+    <div class="admin-panel-content">
+      <!-- Gallery Admin -->
+      <div class="admin-section active" id="admin-gallery">
+        <div class="admin-add-form">
+          <h3>➕ Add New Photo</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Photo URL</label>
+              <input type="url" id="addPhotoUrl" placeholder="https://example.com/photo.jpg"/>
+            </div>
+            <div class="form-group">
+              <label>Caption</label>
+              <input type="text" id="addPhotoCaption" placeholder="Describe the photo"/>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="addPhotoCategory">
+                <option value="performance">Performance</option>
+                <option value="festival">Festival</option>
+                <option value="culture">Culture</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-add-submit" onclick="addPhoto()">ADD PHOTO</button>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;margin-bottom:16px;color:var(--dark-wood);">Current Photos (<span id="photoCount">0</span>)</h3>
+        <div class="admin-items-grid" id="adminGalleryGrid"></div>
+      </div>
+
+      <!-- Videos Admin -->
+      <div class="admin-section" id="admin-videos">
+        <div class="admin-add-form">
+          <h3>➕ Add New Video</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>YouTube Video ID</label>
+              <input type="text" id="addVideoId" placeholder="e.g. dQw4w9WgXcQ"/>
+            </div>
+            <div class="form-group">
+              <label>Video Title</label>
+              <input type="text" id="addVideoTitle" placeholder="Video title"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" id="addVideoDesc" placeholder="Brief description"/>
+            </div>
+            <div class="form-group">
+              <label>Tag / Category</label>
+              <input type="text" id="addVideoTag" placeholder="e.g. Live Concert"/>
+            </div>
+          </div>
+          <button class="btn-add-submit" onclick="addVideo()">ADD VIDEO</button>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;margin-bottom:16px;color:var(--dark-wood);">Current Videos (<span id="videoCount">0</span>)</h3>
+        <div class="admin-video-list" id="adminVideoList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════
+//  DATA STORE (localStorage)
+// ═══════════════════════════════════════════
+const DEFAULT_PHOTOS = [
+  { id: 1, url: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80', caption: 'Evening Raga Performance', category: 'performance' },
+  { id: 2, url: 'https://images.unsplash.com/photo-1504898770365-14faca6a7320?w=600&q=80', caption: 'Desert Sunset Session', category: 'festival' },
+  { id: 3, url: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80', caption: 'Folk Music Night', category: 'performance' },
+  { id: 4, url: 'https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?w=600&q=80', caption: 'Cultural Heritage Show', category: 'culture' },
+  { id: 5, url: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&q=80', caption: 'International Stage', category: 'performance' },
+  { id: 6, url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80', caption: 'Folk Festival Barmer', category: 'festival' },
+  { id: 7, url: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80', caption: 'Traditional Instruments', category: 'culture' },
+  { id: 8, url: 'https://images.unsplash.com/photo-1501612780327-45045538702b?w=600&q=80', caption: 'Pushkar Fair Melodies', category: 'festival' },
+];
+
+const DEFAULT_VIDEOS = [
+  { id: 1, ytId: 'xHkq1edcbk4', title: 'Manganiyar Live at Mehrangarh', desc: 'A soul-stirring performance at the historic Mehrangarh Fort, Jodhpur.', tag: 'Live Concert' },
+  { id: 2, ytId: 'CbGF4tIH91g', title: 'Desert Folk — Sam Dunes', desc: 'Evening of folk music amidst the golden sand dunes of Jaisalmer.', tag: 'Desert Evening' },
+  { id: 3, ytId: 'xHkq1edcbk4', title: 'Rajasthani Folk Fusion', desc: 'Traditional Rajasthani folk fused with contemporary world music arrangements.', tag: 'Fusion' },
+  { id: 4, ytId: 'CbGF4tIH91g', title: 'Workshop: Dholak Basics', desc: 'Learn the fundamentals of Dholak rhythm with Master Bhura Langa.', tag: 'Workshop' },
+];
+
+function getPhotos() {
+  const stored = localStorage.getItem('gfm_photos');
+  return stored ? JSON.parse(stored) : DEFAULT_PHOTOS;
+}
+
+function savePhotos(photos) {
+  localStorage.setItem('gfm_photos', JSON.stringify(photos));
+}
+
+function getVideos() {
+  const stored = localStorage.getItem('gfm_videos');
+  return stored ? JSON.parse(stored) : DEFAULT_VIDEOS;
+}
+
+function saveVideos(videos) {
+  localStorage.setItem('gfm_videos', JSON.stringify(videos));
+}
+
+// ═══════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+  closeMenu();
+
+  if (name === 'gallery') renderGallery('all');
+  if (name === 'videos') renderVideos();
+  if (name === 'admin') renderAdminGallery(), renderAdminVideos();
+}
+
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function closeMenu() {
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════
+//  GALLERY
+// ═══════════════════════════════════════════
+let currentFilter = 'all';
+let lightboxIndex = 0;
+let lightboxPhotos = [];
+
+function renderGallery(filter) {
+  currentFilter = filter;
+  const photos = getPhotos();
+  lightboxPhotos = filter === 'all' ? photos : photos.filter(p => p.category === filter);
+  const grid = document.getElementById('galleryGrid');
+  if (!lightboxPhotos.length) {
+    grid.innerHTML = '<p class="empty-msg">No photos in this category yet.</p>';
+    return;
+  }
+  grid.innerHTML = lightboxPhotos.map((p, i) => `
+    <div class="gallery-item" onclick="openLightbox(${i})">
+      <img src="${p.url}" alt="${p.caption}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80'"/>
+      <div class="gallery-overlay">
+        <span>${p.caption}</span>
+        <span style="font-size:0.7rem;opacity:0.7;font-family:'Josefin Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;">${p.category}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGallery(cat);
+}
+
+function openLightbox(i) {
+  lightboxIndex = i;
+  document.getElementById('lightboxImg').src = lightboxPhotos[i].url;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+function navLightbox(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+  document.getElementById('lightboxImg').src = lightboxPhotos[lightboxIndex].url;
+}
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+    if (e.key === 'Escape') closeLightbox();
+  }
+  if (document.getElementById('videoModal').classList.contains('open') && e.key === 'Escape') closeVideoModal();
+});
+
+// ═══════════════════════════════════════════
+//  VIDEOS
+// ═══════════════════════════════════════════
+function renderVideos() {
+  const videos = getVideos();
+  const grid = document.getElementById('videosGrid');
+  if (!videos.length) {
+    grid.innerHTML = '<p class="empty-msg">No videos added yet.</p>';
+    return;
+  }
+  grid.innerHTML = videos.map(v => `
+    <div class="video-card">
+      <div class="video-thumb" onclick="openVideoModal('${v.ytId}')">
+        <img class="video-thumb-img" src="https://img.youtube.com/vi/${v.ytId}/hqdefault.jpg" alt="${v.title}" onerror="this.src='https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80'"/>
+        <div class="play-btn">▶</div>
+      </div>
+      <div class="video-info">
+        <h3>${v.title}</h3>
+        <p>${v.desc}</p>
+        <span class="video-tag">${v.tag}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openVideoModal(ytId) {
+  document.getElementById('videoModalFrame').src = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+  document.getElementById('videoModal').classList.add('open');
+}
+
+function closeVideoModal() {
+  document.getElementById('videoModal').classList.remove('open');
+  document.getElementById('videoModalFrame').src = '';
+}
+
+// ═══════════════════════════════════════════
+//  ADMIN AUTH
+// ═══════════════════════════════════════════
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'gunsar2026';
+
+function doLogin() {
+  const u = document.getElementById('adminUser').value;
+  const p = document.getElementById('adminPass').value;
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminDash').style.display = 'block';
+    renderAdminGallery();
+    renderAdminVideos();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  document.getElementById('adminLogin').style.display = 'flex';
+  document.getElementById('adminDash').style.display = 'none';
+  document.getElementById('adminUser').value = '';
+  document.getElementById('adminPass').value = '';
+  document.getElementById('loginError').style.display = 'none';
+}
+
+function switchAdminTab(name, btn) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('admin-' + name).classList.add('active');
+}
+
+// ═══════════════════════════════════════════
+//  ADMIN GALLERY MANAGEMENT
+// ═══════════════════════════════════════════
+function renderAdminGallery() {
+  const photos = getPhotos();
+  document.getElementById('photoCount').textContent = photos.length;
+  const grid = document.getElementById('adminGalleryGrid');
+  if (!photos.length) {
+    grid.innerHTML = '<p class="empty-msg">No photos yet. Add one above.</p>';
+    return;
+  }
+  grid.innerHTML = photos.map(p => `
+    <div class="admin-item">
+      <img src="${p.url}" alt="${p.caption}" onerror="this.src='https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80'" loading="lazy"/>
+      <div class="admin-item-info">
+        <p>${p.caption}</p>
+        <small style="color:var(--saffron);font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;">${p.category}</small><br/>
+        <button class="btn-delete" style="margin-top:8px;" onclick="deletePhoto(${p.id})">🗑 Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addPhoto() {
+  const url = document.getElementById('addPhotoUrl').value.trim();
+  const caption = document.getElementById('addPhotoCaption').value.trim();
+  const category = document.getElementById('addPhotoCategory').value;
+  if (!url || !caption) { showToast('Please fill in URL and caption!'); return; }
+  const photos = getPhotos();
+  photos.push({ id: Date.now(), url, caption, category });
+  savePhotos(photos);
+  document.getElementById('addPhotoUrl').value = '';
+  document.getElementById('addPhotoCaption').value = '';
+  renderAdminGallery();
+  showToast('✅ Photo added successfully!');
+}
+
+function deletePhoto(id) {
+  if (!confirm('Delete this photo?')) return;
+  const photos = getPhotos().filter(p => p.id !== id);
+  savePhotos(photos);
+  renderAdminGallery();
+  showToast('🗑 Photo deleted.');
+}
+
+// ═══════════════════════════════════════════
+//  ADMIN VIDEOS MANAGEMENT
+// ═══════════════════════════════════════════
+function renderAdminVideos() {
+  const videos = getVideos();
+  document.getElementById('videoCount').textContent = videos.length;
+  const list = document.getElementById('adminVideoList');
+  if (!videos.length) {
+    list.innerHTML = '<p class="empty-msg">No videos yet. Add one above.</p>';
+    return;
+  }
+  list.innerHTML = videos.map(v => `
+    <div class="admin-video-item">
+      <img class="admin-video-thumb" src="https://img.youtube.com/vi/${v.ytId}/mqdefault.jpg" alt="${v.title}" onerror="this.style.background='var(--dark-wood)'"/>
+      <div class="admin-video-info">
+        <strong>${v.title}</strong>
+        <small>${v.desc}</small><br/>
+        <small style="color:var(--saffron);">YT: ${v.ytId} · ${v.tag}</small>
+      </div>
+      <button class="btn-delete" onclick="deleteVideo(${v.id})">🗑 Delete</button>
+    </div>
+  `).join('');
+}
+
+function addVideo() {
+  const ytId = document.getElementById('addVideoId').value.trim();
+  const title = document.getElementById('addVideoTitle').value.trim();
+  const desc = document.getElementById('addVideoDesc').value.trim();
+  const tag = document.getElementById('addVideoTag').value.trim() || 'Performance';
+  if (!ytId || !title) { showToast('Please fill in YouTube ID and title!'); return; }
+  const videos = getVideos();
+  videos.push({ id: Date.now(), ytId, title, desc, tag });
+  saveVideos(videos);
+  document.getElementById('addVideoId').value = '';
+  document.getElementById('addVideoTitle').value = '';
+  document.getElementById('addVideoDesc').value = '';
+  document.getElementById('addVideoTag').value = '';
+  renderAdminVideos();
+  showToast('✅ Video added successfully!');
+}
+
+function deleteVideo(id) {
+  if (!confirm('Delete this video?')) return;
+  const videos = getVideos().filter(v => v.id !== id);
+  saveVideos(videos);
+  renderAdminVideos();
+  showToast('🗑 Video deleted.');
+}
+
+// ═══════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Init
+renderGallery('all');
+</script>
+</body>
+</html>
