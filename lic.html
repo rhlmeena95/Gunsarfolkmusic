@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorized LIC Advisor | Secure Your Future</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --lic-blue: #003366;
+            --lic-yellow: #ffcc00;
+        }
+        .navbar { background-color: var(--lic-blue); }
+        .hero-section {
+            background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80');
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+        }
+        .btn-primary { background-color: var(--lic-blue); border: none; }
+        .btn-warning { background-color: var(--lic-yellow); color: #000; font-weight: bold; }
+        .feature-card { border: none; transition: 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">LIC Advisor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#plans">Insurance Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Zindagi Ke Saath Bhi, Zindagi Ke Baad Bhi</h1>
+            <p class="lead">Providing reliable financial security for you and your loved ones.</p>
+            <a href="#contact" class="btn btn-warning btn-lg mt-3">Get a Free Consultation</a>
+        </div>
+    </header>
+
+    <section id="plans" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Popular Insurance Plans</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card p-4">
+                        <h3>Term Assurance</h3>
+                        <p>High life cover at affordable premiums to protect your family's financial future.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card p-4">
+                        <h3>Pension Plans</h3>
+                        <p>Secure your retirement with a steady monthly income and financial independence.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card p-4">
+                        <h3>Children's Plans</h3>
+                        <p>Invest early to ensure your child's higher education and marriage are fully funded.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h2 class="mb-4">Get a Quote</h2>
+                    <form>
+                        <input type="text" class="form-control mb-3" placeholder="Your Name" required>
+                        <input type="email" class="form-control mb-3" placeholder="Email Address" required>
+                        <input type="tel" class="form-control mb-3" placeholder="Phone Number" required>
+                        <select class="form-select mb-3">
+                            <option selected>Select Interest</option>
+                            <option>Life Insurance</option>
+                            <option>Investment Plan</option>
+                            <option>Health Insurance</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary w-100 py-2">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4 text-center">
+        <p>&copy; 2024 Licensed LIC Agent. All Rights Reserved.</p>
+        <p><small>Insurance is the subject matter of solicitation.</small></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
