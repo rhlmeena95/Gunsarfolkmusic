@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Panel — Gunsar Folk Music</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Sora:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0F0D0B;
+  --sidebar: #161210;
+  --panel: #1C1815;
+  --card: #231E1A;
+  --card2: #2A2320;
+  --border: #332C27;
+  --border2: #3D3530;
+  --saffron: #E8841A;
+  --saffron2: #F5A040;
+  --gold: #D4A017;
+  --cream: #F5E6C8;
+  --text: #E8DDD0;
+  --text2: #9A8A7A;
+  --text3: #6A5A4A;
+  --red: #E05050;
+  --green: #4CAF7A;
+  --blue: #5B9BD5;
+  --sidebar-w: 240px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
+
+/* ── LOGIN ── */
+#loginScreen {
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  animation:fadeIn .4s ease;
+}
+.login-wrap {
+  width:100%;max-width:400px;padding:20px;
+}
+.login-box {
+  background:var(--panel);
+  border:1px solid var(--border2);
+  border-top:3px solid var(--saffron);
+  padding:48px 40px;
+  position:relative;overflow:hidden;
+}
+.login-box::before {
+  content:'';position:absolute;top:0;right:0;
+  width:120px;height:120px;
+  background:radial-gradient(circle,rgba(232,132,26,.15),transparent 70%);
+  pointer-events:none;
+}
+.login-logo {
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:32px;
+}
+.login-logo-icon {
+  width:42px;height:42px;background:var(--saffron);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.login-logo h1 {
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;color:var(--cream);line-height:1.2;
+}
+.login-logo span{display:block;font-family:'Sora',sans-serif;font-size:.65rem;font-weight:400;color:var(--text2);letter-spacing:3px;text-transform:uppercase;margin-top:2px;}
+.login-label {
+  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text2);margin-bottom:6px;display:block;
+}
+.login-input {
+  width:100%;background:var(--card);border:1px solid var(--border2);
+  color:var(--text);font-family:'Sora',sans-serif;font-size:.9rem;
+  padding:11px 14px;outline:none;margin-bottom:14px;
+  transition:border-color .2s;
+}
+.login-input:focus{border-color:var(--saffron);}
+.login-btn {
+  width:100%;background:var(--saffron);color:white;border:none;
+  font-family:'Sora',sans-serif;font-size:.75rem;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  padding:13px;cursor:pointer;transition:background .2s;
+  margin-top:6px;
+}
+.login-btn:hover{background:var(--saffron2);}
+.login-error{color:#ff7070;font-size:.8rem;margin-bottom:12px;display:none;}
+.login-hint{
+  text-align:center;margin-top:20px;
+  font-size:.72rem;color:var(--text3);
+  font-family:'DM Mono',monospace;
+}
+
+/* ── SHELL ── */
+#shell{display:none;height:100vh;flex-direction:row;}
+#shell.visible{display:flex;}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  height:100vh;overflow:hidden;
+  position:relative;
+}
+.sidebar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:200px;
+  background:linear-gradient(0deg,rgba(232,132,26,.04),transparent);
+  pointer-events:none;
+}
+.sb-logo {
+  padding:22px 20px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.sb-logo-icon{
+  width:34px;height:34px;background:var(--saffron);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.sb-logo h2{
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;color:var(--cream);line-height:1.2;
+}
+.sb-logo small{display:block;font-family:'Sora',sans-serif;font-size:.55rem;font-weight:400;color:var(--text3);letter-spacing:2px;text-transform:uppercase;}
+
+.sb-section-label {
+  font-size:.55rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text3);padding:18px 20px 6px;
+}
+
+.sb-item {
+  display:flex;align-items:center;gap:10px;
+  padding:10px 20px;cursor:pointer;
+  font-size:.8rem;font-weight:500;
+  color:var(--text2);
+  border-left:2px solid transparent;
+  transition:all .15s;
+  position:relative;
+}
+.sb-item:hover{color:var(--text);background:var(--card);}
+.sb-item.active{
+  color:var(--saffron2);
+  border-left-color:var(--saffron);
+  background:rgba(232,132,26,.07);
+}
+.sb-item .sb-icon{font-size:1rem;flex-shrink:0;width:20px;text-align:center;}
+.sb-badge{
+  margin-left:auto;background:var(--saffron);
+  color:white;font-size:.55rem;font-weight:700;
+  padding:2px 7px;border-radius:20px;
+}
+
+.sb-bottom {
+  margin-top:auto;padding:16px 20px;
+  border-top:1px solid var(--border);
+}
+.sb-logout {
+  display:flex;align-items:center;gap:8px;
+  font-size:.75rem;color:var(--text3);cursor:pointer;
+  padding:8px 0;transition:color .2s;
+}
+.sb-logout:hover{color:var(--red);}
+.sb-user{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:12px;
+}
+.sb-avatar{
+  width:30px;height:30px;background:var(--saffron);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;color:white;font-weight:700;flex-shrink:0;
+}
+.sb-user-info strong{display:block;font-size:.78rem;color:var(--text);}
+.sb-user-info small{font-size:.65rem;color:var(--text3);}
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden;}
+
+/* topbar */
+.topbar{
+  background:var(--panel);border-bottom:1px solid var(--border);
+  padding:0 28px;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.topbar-title{
+  font-size:.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text2);
+}
+.topbar-title span{color:var(--saffron);font-weight:600;}
+.topbar-actions{display:flex;align-items:center;gap:12px;}
+.topbar-time{
+  font-family:'DM Mono',monospace;font-size:.72rem;
+  color:var(--text3);
+}
+.view-site-btn {
+  font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  background:transparent;border:1px solid var(--border2);
+  color:var(--text2);padding:6px 14px;cursor:pointer;
+  font-family:'Sora',sans-serif;font-weight:500;
+  transition:all .2s;
+}
+.view-site-btn:hover{border-color:var(--saffron);color:var(--saffron);}
+
+/* content area */
+.content{flex:1;overflow-y:auto;padding:28px;}
+.content::-webkit-scrollbar{width:4px;}
+.content::-webkit-scrollbar-track{background:transparent;}
+.content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+/* sections */
+.section{display:none;animation:fadeUp .3s ease;}
+.section.active{display:block;}
+
+/* ── CARDS & UI PRIMITIVES ── */
+.page-header{margin-bottom:24px;}
+.page-header h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;color:var(--cream);margin-bottom:4px;
+}
+.page-header p{font-size:.8rem;color:var(--text2);}
+
+.stats-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;margin-bottom:24px;
+}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:20px;position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--saffron);
+}
+.stat-card .sc-val{
+  font-family:'Playfair Display',serif;font-size:2rem;
+  font-weight:700;color:var(--cream);line-height:1;
+}
+.stat-card .sc-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-top:6px;}
+.stat-card .sc-icon{position:absolute;right:16px;top:16px;font-size:1.4rem;opacity:.3;}
+
+/* Table */
+.table-wrap{background:var(--card);border:1px solid var(--border);overflow:hidden;}
+.table-header{
+  padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.table-header h3{font-size:.8rem;font-weight:600;color:var(--text);letter-spacing:.5px;}
+table{width:100%;border-collapse:collapse;}
+th{
+  background:var(--panel);
+  font-size:.6rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text2);padding:10px 16px;text-align:left;
+  border-bottom:1px solid var(--border);font-weight:500;
+}
+td{
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  font-size:.82rem;color:var(--text);vertical-align:middle;
+}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--card2);}
+.td-img{width:60px;height:40px;object-fit:cover;border:1px solid var(--border2);}
+.td-vid-thumb{width:80px;height:45px;object-fit:cover;border:1px solid var(--border2);}
+
+/* Badges */
+.badge{
+  font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;
+  padding:3px 9px;border-radius:2px;
+}
+.badge-orange{background:rgba(232,132,26,.15);color:var(--saffron);}
+.badge-green{background:rgba(76,175,122,.15);color:var(--green);}
+.badge-blue{background:rgba(91,155,213,.15);color:var(--blue);}
+.badge-gray{background:rgba(154,138,122,.1);color:var(--text2);}
+
+/* Action buttons */
+.btn{
+  font-family:'Sora',sans-serif;font-size:.65rem;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:7px 16px;cursor:pointer;border:none;
+  transition:all .2s;display:inline-flex;align-items:center;gap:5px;
+}
+.btn-saffron{background:var(--saffron);color:white;}
+.btn-saffron:hover{background:var(--saffron2);}
+.btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text2);}
+.btn-outline:hover{border-color:var(--saffron);color:var(--saffron);}
+.btn-red{background:rgba(224,80,80,.1);border:1px solid rgba(224,80,80,.25);color:var(--red);}
+.btn-red:hover{background:rgba(224,80,80,.2);}
+.btn-sm{padding:5px 12px;font-size:.58rem;}
+.btn-icon{padding:6px 10px;font-size:.9rem;}
+
+/* Grid views */
+.photo-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:12px;
+}
+.photo-card{
+  background:var(--card);border:1px solid var(--border);
+  overflow:hidden;position:relative;
+  transition:border-color .2s;
+}
+.photo-card:hover{border-color:var(--border2);}
+.photo-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.photo-card-info{padding:10px 12px;}
+.photo-card-info p{font-size:.75rem;color:var(--text);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.photo-card-actions{display:flex;gap:6px;}
+
+/* Modal */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--panel);border:1px solid var(--border2);
+  border-top:3px solid var(--saffron);
+  width:100%;max-width:560px;
+  max-height:90vh;overflow-y:auto;
+  animation:fadeUp .25s ease;
+}
+.modal::-webkit-scrollbar{width:4px;}
+.modal::-webkit-scrollbar-thumb{background:var(--border2);}
+.modal-head{
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-head h3{font-size:.95rem;font-weight:600;color:var(--cream);}
+.modal-close{
+  background:none;border:none;color:var(--text2);
+  font-size:1.3rem;cursor:pointer;line-height:1;
+  transition:color .2s;padding:0;
+}
+.modal-close:hover{color:var(--red);}
+.modal-body{padding:24px;}
+.modal-footer{
+  padding:16px 24px;border-top:1px solid var(--border);
+  display:flex;justify-content:flex-end;gap:10px;
+}
+
+/* Form elements */
+.form-group{margin-bottom:16px;}
+.form-label{
+  display:block;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text2);margin-bottom:7px;font-weight:500;
+}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:var(--card);border:1px solid var(--border2);
+  color:var(--text);font-family:'Sora',sans-serif;font-size:.85rem;
+  padding:10px 14px;outline:none;transition:border-color .2s;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--saffron);}
+.form-input::placeholder{color:var(--text3);}
+.form-select option{background:var(--card);}
+.form-textarea{resize:vertical;min-height:80px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-hint{font-size:.68rem;color:var(--text3);margin-top:5px;}
+
+/* Search bar */
+.search-bar{
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text);font-family:'Sora',sans-serif;font-size:.82rem;
+  padding:8px 14px;outline:none;width:220px;
+  transition:border-color .2s;
+}
+.search-bar:focus{border-color:var(--saffron);}
+.search-bar::placeholder{color:var(--text3);}
+
+/* View toggle */
+.view-toggle{display:flex;gap:4px;}
+.vt-btn{
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text2);padding:7px 10px;cursor:pointer;
+  font-size:.85rem;transition:all .2s;
+}
+.vt-btn.active,.vt-btn:hover{border-color:var(--saffron);color:var(--saffron);}
+
+/* Confirm dialog */
+.confirm-box{
+  background:var(--panel);border:1px solid var(--border2);
+  border-top:3px solid var(--red);
+  padding:28px;max-width:380px;width:100%;
+  animation:fadeUp .2s ease;
+}
+.confirm-box h3{font-size:.95rem;color:var(--cream);margin-bottom:8px;}
+.confirm-box p{font-size:.82rem;color:var(--text2);margin-bottom:20px;line-height:1.5;}
+
+/* Toast */
+.toast-container{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  display:flex;flex-direction:column;gap:8px;
+}
+.toast{
+  background:var(--card2);border:1px solid var(--border2);
+  border-left:3px solid var(--saffron);
+  padding:12px 18px;font-size:.78rem;color:var(--text);
+  display:flex;align-items:center;gap:10px;
+  animation:slideInRight .3s ease;min-width:240px;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.toast.toast-error{border-left-color:var(--red);}
+.toast.toast-success{border-left-color:var(--green);}
+
+/* Dashboard quick stats color accents */
+.sc-orange::before{background:var(--saffron)!important;}
+.sc-green::before{background:var(--green)!important;}
+.sc-blue::before{background:var(--blue)!important;}
+.sc-gray::before{background:var(--text3)!important;}
+
+/* Activity feed */
+.activity-feed{display:flex;flex-direction:column;gap:0;}
+.activity-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 16px;border-bottom:1px solid var(--border);
+}
+.activity-item:last-child{border-bottom:none;}
+.act-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--saffron);flex-shrink:0;margin-top:4px;
+}
+.act-dot.green{background:var(--green);}
+.act-dot.red{background:var(--red);}
+.act-dot.blue{background:var(--blue);}
+.act-text{font-size:.8rem;color:var(--text2);line-height:1.5;}
+.act-text strong{color:var(--text);font-weight:500;}
+.act-time{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text3);white-space:nowrap;margin-left:auto;}
+
+/* Empty state */
+.empty-state{
+  text-align:center;padding:60px 20px;
+}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:12px;opacity:.4;}
+.empty-state p{color:var(--text2);font-size:.85rem;}
+
+/* Settings */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.settings-section{
+  background:var(--card);border:1px solid var(--border);padding:24px;
+}
+.settings-section h3{
+  font-size:.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--saffron);margin-bottom:20px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+
+/* Preview strip */
+.preview-img{
+  width:100%;height:120px;object-fit:cover;
+  border:1px solid var(--border);display:block;margin-bottom:8px;
+}
+
+/* Animations */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+/* Mobile sidebar toggle */
+.mob-menu-btn{
+  display:none;background:none;border:none;
+  color:var(--text2);font-size:1.3rem;cursor:pointer;
+  padding:4px 8px;margin-right:8px;
+}
+.sidebar-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:400;
+}
+
+@media(max-width:768px){
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;z-index:401;
+    transform:translateX(-100%);transition:transform .25s;
+  }
+  .sidebar.mob-open{transform:translateX(0);}
+  .sidebar-overlay.mob-open{display:block;}
+  .main{width:100%;}
+  .mob-menu-btn{display:block;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .settings-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ LOGIN ═══════ -->
+<div id="loginScreen">
+  <div class="login-wrap">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="login-logo-icon">🎵</div>
+        <h1>Gunsar Folk Music<span>Admin Dashboard</span></h1>
+      </div>
+      <div id="loginError" class="login-error">⚠ Invalid credentials. Please try again.</div>
+      <label class="login-label">Username</label>
+      <input class="login-input" type="text" id="loginUser" placeholder="Enter username" autocomplete="off"/>
+      <label class="login-label">Password</label>
+      <input class="login-input" type="password" id="loginPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <button class="login-btn" onclick="doLogin()">SIGN IN →</button>
+      <p class="login-hint">Default credentials: admin / gunsar2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ APP SHELL ═══════ -->
+<div id="shell">
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-icon">🎵</div>
+      <h2>Gunsar Folk<small>Music Admin</small></h2>
+    </div>
+
+    <span class="sb-section-label">Main</span>
+    <div class="sb-item active" onclick="nav('dashboard',this)">
+      <span class="sb-icon">📊</span> Dashboard
+    </div>
+
+    <span class="sb-section-label">Content</span>
+    <div class="sb-item" onclick="nav('gallery',this)">
+      <span class="sb-icon">🖼️</span> Gallery Photos
+      <span class="sb-badge" id="sb-gallery-count">0</span>
+    </div>
+    <div class="sb-item" onclick="nav('videos',this)">
+      <span class="sb-icon">🎬</span> Videos
+      <span class="sb-badge" id="sb-videos-count">0</span>
+    </div>
+    <div class="sb-item" onclick="nav('events',this)">
+      <span class="sb-icon">📅</span> Events
+      <span class="sb-badge" id="sb-events-count">0</span>
+    </div>
+    <div class="sb-item" onclick="nav('programs',this)">
+      <span class="sb-icon">🎤</span> Programs
+    </div>
+    <div class="sb-item" onclick="nav('artists',this)">
+      <span class="sb-icon">👥</span> Artists
+    </div>
+
+    <span class="sb-section-label">System</span>
+    <div class="sb-item" onclick="nav('settings',this)">
+      <span class="sb-icon">⚙️</span> Site Settings
+    </div>
+
+    <div class="sb-bottom">
+      <div class="sb-user">
+        <div class="sb-avatar">A</div>
+        <div class="sb-user-info">
+          <strong>Administrator</strong>
+          <small>Super Admin</small>
+        </div>
+      </div>
+      <div class="sb-logout" onclick="doLogout()">
+        <span>⬅</span> Sign Out
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:0;">
+        <button class="mob-menu-btn" onclick="openMobileSidebar()">☰</button>
+        <span class="topbar-title">GUNSAR FOLK MUSIC / <span id="topbarSection">DASHBOARD</span></span>
+      </div>
+      <div class="topbar-actions">
+        <span class="topbar-time" id="liveClock"></span>
+        <button class="view-site-btn" onclick="window.open('gunsarfolkmusic.html','_blank')">↗ View Site</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ───── DASHBOARD ───── -->
+      <div class="section active" id="sec-dashboard">
+        <div class="page-header">
+          <h2>Dashboard</h2>
+          <p>Welcome back! Here's your site overview.</p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card sc-orange">
+            <div class="sc-icon">🖼️</div>
+            <div class="sc-val" id="dash-photos">0</div>
+            <div class="sc-label">Gallery Photos</div>
+          </div>
+          <div class="stat-card sc-green">
+            <div class="sc-icon">🎬</div>
+            <div class="sc-val" id="dash-videos">0</div>
+            <div class="sc-label">Videos</div>
+          </div>
+          <div class="stat-card sc-blue">
+            <div class="sc-icon">📅</div>
+            <div class="sc-val" id="dash-events">0</div>
+            <div class="sc-label">Events</div>
+          </div>
+          <div class="stat-card sc-gray">
+            <div class="sc-icon">👥</div>
+            <div class="sc-val" id="dash-artists">0</div>
+            <div class="sc-label">Artists</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:20px;">
+
+          <!-- Recent gallery -->
+          <div class="table-wrap">
+            <div class="table-header">
+              <h3>Recent Photos</h3>
+              <button class="btn btn-outline btn-sm" onclick="nav('gallery',document.querySelector('.sb-item:nth-child(5))'))">View All →</button>
+            </div>
+            <div id="dash-recent-photos" style="padding:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;"></div>
+          </div>
+
+          <!-- Activity -->
+          <div class="table-wrap">
+            <div class="table-header"><h3>Recent Activity</h3></div>
+            <div class="activity-feed" id="activityFeed"></div>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="table-wrap">
+          <div class="table-header"><h3>Quick Actions</h3></div>
+          <div style="padding:20px;display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn btn-saffron" onclick="nav('gallery');openAddPhotoModal()">+ Add Photo</button>
+            <button class="btn btn-saffron" onclick="nav('videos');openAddVideoModal()">+ Add Video</button>
+            <button class="btn btn-saffron" onclick="nav('events');openAddEventModal()">+ Add Event</button>
+            <button class="btn btn-saffron" onclick="nav('artists');openAddArtistModal()">+ Add Artist</button>
+            <button class="btn btn-outline" onclick="exportData()">↓ Export Data</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ───── GALLERY ───── -->
+      <div class="section" id="sec-gallery">
+        <div class="page-header">
+          <h2>Gallery Photos</h2>
+          <p>Manage all photos shown on the gallery page.</p>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <input class="search-bar" placeholder="Search photos…" oninput="renderGallerySection(this.value)"/>
+            <select class="form-select" style="width:auto;padding:8px 12px;" id="galleryFilterCat" onchange="renderGallerySection()">
+              <option value="">All Categories</option>
+              <option value="performance">Performance</option>
+              <option value="festival">Festival</option>
+              <option value="culture">Culture</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <div class="view-toggle">
+              <button class="vt-btn active" id="vt-grid" onclick="setGalleryView('grid',this)" title="Grid">▦</button>
+              <button class="vt-btn" id="vt-list" onclick="setGalleryView('list',this)" title="List">☰</button>
+            </div>
+            <button class="btn btn-saffron" onclick="openAddPhotoModal()">+ Add Photo</button>
+          </div>
+        </div>
+
+        <div id="galleryContent"></div>
+      </div>
+
+      <!-- ───── VIDEOS ───── -->
+      <div class="section" id="sec-videos">
+        <div class="page-header">
+          <h2>Videos</h2>
+          <p>Manage YouTube videos shown on the videos page.</p>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+          <input class="search-bar" placeholder="Search videos…" oninput="renderVideoSection(this.value)"/>
+          <button class="btn btn-saffron" onclick="openAddVideoModal()">+ Add Video</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Thumbnail</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Tag</th>
+                <th>YouTube ID</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="videosTableBody"></tbody>
+          </table>
+          <div id="videosEmpty" class="empty-state" style="display:none;">
+            <div class="es-icon">🎬</div>
+            <p>No videos yet. Add your first video!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ───── EVENTS ───── -->
+      <div class="section" id="sec-events">
+        <div class="page-header">
+          <h2>Events</h2>
+          <p>Manage upcoming events shown on the home page.</p>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <input class="search-bar" placeholder="Search events…" oninput="renderEventsTable(this.value)"/>
+          <button class="btn btn-saffron" onclick="openAddEventModal()">+ Add Event</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Event Name</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="eventsTableBody"></tbody>
+          </table>
+          <div id="eventsEmpty" class="empty-state" style="display:none;">
+            <div class="es-icon">📅</div>
+            <p>No events yet. Add your first event!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ───── PROGRAMS ───── -->
+      <div class="section" id="sec-programs">
+        <div class="page-header">
+          <h2>Programs</h2>
+          <p>Manage program cards shown on the programs page.</p>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+          <button class="btn btn-saffron" onclick="openAddProgramModal()">+ Add Program</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Program Name</th>
+                <th>Description</th>
+                <th>Tag</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="programsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ───── ARTISTS ───── -->
+      <div class="section" id="sec-artists">
+        <div class="page-header">
+          <h2>Artists</h2>
+          <p>Manage artist profiles shown on the about page.</p>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+          <button class="btn btn-saffron" onclick="openAddArtistModal()">+ Add Artist</button>
+        </div>
+
+        <div id="artistsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;"></div>
+      </div>
+
+      <!-- ───── SETTINGS ───── -->
+      <div class="section" id="sec-settings">
+        <div class="page-header">
+          <h2>Site Settings</h2>
+          <p>Configure global site information and credentials.</p>
+        </div>
+
+        <div class="settings-grid">
+          <div class="settings-section">
+            <h3>Site Information</h3>
+            <div class="form-group">
+              <label class="form-label">Site Name</label>
+              <input class="form-input" id="set-sitename" value="Gunsar Folk Music"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tagline</label>
+              <input class="form-input" id="set-tagline" value="The Soul of Rajasthan"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input class="form-input" id="set-email" value="info@gunsarfolkmusic.com"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input class="form-input" id="set-phone" value="+91 98765 43210"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Address</label>
+              <input class="form-input" id="set-address" value="Barmer, Rajasthan, India"/>
+            </div>
+            <button class="btn btn-saffron" onclick="saveSettings()">Save Settings</button>
+          </div>
+
+          <div class="settings-section">
+            <h3>Change Admin Password</h3>
+            <div class="form-group">
+              <label class="form-label">Current Password</label>
+              <input class="form-input" type="password" id="set-curpass" placeholder="Current password"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">New Password</label>
+              <input class="form-input" type="password" id="set-newpass" placeholder="New password"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm New Password</label>
+              <input class="form-input" type="password" id="set-confpass" placeholder="Confirm new password"/>
+            </div>
+            <button class="btn btn-saffron" onclick="changePassword()">Update Password</button>
+
+            <h3 style="margin-top:28px;">Data Management</h3>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+              <button class="btn btn-outline" onclick="exportData()">↓ Export All Data (JSON)</button>
+              <button class="btn btn-red" onclick="confirmResetData()">⚠ Reset All Data</button>
+            </div>
+          </div>
+
+          <div class="settings-section" style="grid-column:1/-1;">
+            <h3>Statistics Overview</h3>
+            <div class="stats-row" style="margin-bottom:0;">
+              <div class="stat-card sc-orange"><div class="sc-icon">🖼️</div><div class="sc-val" id="set-photos">0</div><div class="sc-label">Photos</div></div>
+              <div class="stat-card sc-green"><div class="sc-icon">🎬</div><div class="sc-val" id="set-vids">0</div><div class="sc-label">Videos</div></div>
+              <div class="stat-card sc-blue"><div class="sc-icon">📅</div><div class="sc-val" id="set-evts">0</div><div class="sc-label">Events</div></div>
+              <div class="stat-card sc-gray"><div class="sc-icon">👥</div><div class="sc-val" id="set-arts">0</div><div class="sc-label">Artists</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- ═══════ MODALS ═══════ -->
+
+<!-- Add/Edit Photo Modal -->
+<div class="modal-overlay" id="photoModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="photoModalTitle">Add New Photo</h3>
+      <button class="modal-close" onclick="closeModal('photoModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="photoEditId"/>
+      <div class="form-group">
+        <label class="form-label">Photo URL *</label>
+        <input class="form-input" id="photoUrl" placeholder="https://example.com/photo.jpg"/>
+        <p class="form-hint">Use a direct image URL (Unsplash, Cloudinary, etc.)</p>
+      </div>
+      <div id="photoPreviewWrap" style="display:none;">
+        <img id="photoPreview" class="preview-img" src="" alt="Preview"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Caption *</label>
+          <input class="form-input" id="photoCaption" placeholder="Describe the photo"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="photoCat">
+            <option value="performance">Performance</option>
+            <option value="festival">Festival</option>
+            <option value="culture">Culture</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('photoModal')">Cancel</button>
+      <button class="btn btn-saffron" onclick="savePhoto()">Save Photo</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit Video Modal -->
+<div class="modal-overlay" id="videoModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="videoModalTitle">Add New Video</h3>
+      <button class="modal-close" onclick="closeModal('videoModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="videoEditId"/>
+      <div class="form-group">
+        <label class="form-label">YouTube Video ID *</label>
+        <input class="form-input" id="videoYtId" placeholder="e.g. dQw4w9WgXcQ"/>
+        <p class="form-hint">Get this from the YouTube URL: youtube.com/watch?v=<strong>THIS_PART</strong></p>
+      </div>
+      <div id="videoPreviewWrap" style="display:none;margin-bottom:14px;">
+        <img id="videoThumbPreview" style="width:100%;height:120px;object-fit:cover;border:1px solid var(--border2);" src="" alt="Thumbnail"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Title *</label>
+        <input class="form-input" id="videoTitle" placeholder="Video title"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tag / Category</label>
+          <input class="form-input" id="videoTag" placeholder="e.g. Live Concert"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-textarea" id="videoDesc" placeholder="Brief description of the video"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('videoModal')">Cancel</button>
+      <button class="btn btn-saffron" onclick="saveVideo()">Save Video</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit Event Modal -->
+<div class="modal-overlay" id="eventModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="eventModalTitle">Add New Event</h3>
+      <button class="modal-close" onclick="closeModal('eventModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="eventEditId"/>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Event Date *</label>
+          <input class="form-input" type="date" id="eventDate"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="eventStatus">
+            <option value="upcoming">Upcoming</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Event Name *</label>
+        <input class="form-input" id="eventName" placeholder="e.g. Rajasthan Folk Festival 2026"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Location</label>
+        <input class="form-input" id="eventLocation" placeholder="e.g. Mehrangarh Fort, Jodhpur"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-textarea" id="eventDesc" placeholder="Brief event description"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('eventModal')">Cancel</button>
+      <button class="btn btn-saffron" onclick="saveEvent()">Save Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit Program Modal -->
+<div class="modal-overlay" id="programModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="programModalTitle">Add Program</h3>
+      <button class="modal-close" onclick="closeModal('programModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="programEditId"/>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Icon (Emoji)</label>
+          <input class="form-input" id="programIcon" placeholder="🎤" maxlength="4"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tag</label>
+          <input class="form-input" id="programTag" placeholder="e.g. Performances"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Program Name *</label>
+        <input class="form-input" id="programName" placeholder="e.g. Live Concerts"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-textarea" id="programDesc" placeholder="Describe this program"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('programModal')">Cancel</button>
+      <button class="btn btn-saffron" onclick="saveProgram()">Save Program</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add/Edit Artist Modal -->
+<div class="modal-overlay" id="artistModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="artistModalTitle">Add Artist</h3>
+      <button class="modal-close" onclick="closeModal('artistModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="artistEditId"/>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Avatar (Emoji)</label>
+          <input class="form-input" id="artistAvatar" placeholder="🎵" maxlength="4"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Instrument / Role</label>
+          <input class="form-input" id="artistRole" placeholder="e.g. Sarangi Virtuoso"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Artist Name *</label>
+        <input class="form-input" id="artistName" placeholder="e.g. Ustad Ramzan Khan"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Bio (optional)</label>
+        <textarea class="form-textarea" id="artistBio" placeholder="Short biography"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('artistModal')">Cancel</button>
+      <button class="btn btn-saffron" onclick="saveArtist()">Save Artist</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Dialog -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="confirm-box">
+    <h3 id="confirmTitle">Are you sure?</h3>
+    <p id="confirmMsg">This action cannot be undone.</p>
+    <div style="display:flex;justify-content:flex-end;gap:10px;">
+      <button class="btn btn-outline" onclick="closeModal('confirmModal')">Cancel</button>
+      <button class="btn btn-red" id="confirmOkBtn" onclick="">Confirm Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ════════════════════════════════════════════
+//  DEFAULTS
+// ════════════════════════════════════════════
+const DEFAULTS = {
+  photos: [
+    {id:1,url:'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80',caption:'Evening Raga Performance',category:'performance'},
+    {id:2,url:'https://images.unsplash.com/photo-1504898770365-14faca6a7320?w=600&q=80',caption:'Desert Sunset Session',category:'festival'},
+    {id:3,url:'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80',caption:'Folk Music Night',category:'performance'},
+    {id:4,url:'https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?w=600&q=80',caption:'Cultural Heritage Show',category:'culture'},
+    {id:5,url:'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&q=80',caption:'International Stage',category:'performance'},
+    {id:6,url:'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80',caption:'Folk Festival Barmer',category:'festival'},
+    {id:7,url:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80',caption:'Traditional Instruments',category:'culture'},
+    {id:8,url:'https://images.unsplash.com/photo-1501612780327-45045538702b?w=600&q=80',caption:'Pushkar Fair Melodies',category:'festival'},
+  ],
+  videos: [
+    {id:1,ytId:'xHkq1edcbk4',title:'Manganiyar Live at Mehrangarh',desc:'A soul-stirring performance at the historic Mehrangarh Fort, Jodhpur.',tag:'Live Concert'},
+    {id:2,ytId:'CbGF4tIH91g',title:'Desert Folk — Sam Dunes',desc:'Evening of folk music amidst the golden sand dunes of Jaisalmer.',tag:'Desert Evening'},
+    {id:3,ytId:'xHkq1edcbk4',title:'Rajasthani Folk Fusion',desc:'Traditional folk fused with contemporary world music.',tag:'Fusion'},
+    {id:4,ytId:'CbGF4tIH91g',title:'Workshop: Dholak Basics',desc:'Learn Dholak rhythm with Master Bhura Langa.',tag:'Workshop'},
+  ],
+  events: [
+    {id:1,date:'2026-04-15',name:'Rajasthan Folk Festival',location:'Mehrangarh Fort, Jodhpur',desc:'A grand celebration of folk music traditions.',status:'upcoming'},
+    {id:2,date:'2026-05-03',name:'Desert Melody Night',location:'Sam Dunes, Jaisalmer',desc:'Intimate evening of Manganiyar and Langa folk music.',status:'upcoming'},
+    {id:3,date:'2026-06-20',name:'International Folk Summit',location:'New Delhi Cultural Centre',desc:'Gunsar Folk Music represents Rajasthan globally.',status:'upcoming'},
+  ],
+  programs: [
+    {id:1,icon:'🎤',name:'Live Concerts',desc:'Full-scale performances featuring 15–30 artists.',tag:'Performances'},
+    {id:2,icon:'🎓',name:'Music Workshops',desc:'Hands-on learning sessions for traditional instruments.',tag:'Education'},
+    {id:3,icon:'🏕️',name:'Desert Evenings',desc:'Intimate folk music evenings in the Thar desert.',tag:'Experience'},
+    {id:4,icon:'🌍',name:'International Tours',desc:'Touring over 30 countries worldwide.',tag:'Global'},
+    {id:5,icon:'📚',name:'Cultural Documentation',desc:'Documenting rare folk compositions and oral histories.',tag:'Heritage'},
+    {id:6,icon:'👶',name:'Youth Training',desc:'Training program for young musicians aged 10–25.',tag:'Youth'},
+  ],
+  artists: [
+    {id:1,avatar:'🎵',name:'Ustad Ramzan Khan',role:'Manganiyar Vocalist',bio:''},
+    {id:2,avatar:'🥁',name:'Bhura Langa',role:'Dholak Maestro',bio:''},
+    {id:3,avatar:'🎶',name:'Suwa Devi',role:'Folk Vocalist & Dancer',bio:''},
+    {id:4,avatar:'🪘',name:'Pappu Khan',role:'Sarangi Virtuoso',bio:''},
+    {id:5,avatar:'🎸',name:'Hamira Bhopa',role:'Ravanhatta Player',bio:''},
+    {id:6,avatar:'🌺',name:'Leela Devi',role:'Traditional Ghoomar',bio:''},
+  ],
+  settings: {
+    sitename:'Gunsar Folk Music',tagline:'The Soul of Rajasthan',
+    email:'info@gunsarfolkmusic.com',phone:'+91 98765 43210',address:'Barmer, Rajasthan, India'
+  },
+  credentials: {user:'admin',pass:'gunsar2026'},
+  activity: []
+};
+
+// ════════════════════════════════════════════
+//  STORAGE HELPERS
+// ════════════════════════════════════════════
+const get = k => { const v=localStorage.getItem('gfm_'+k); return v?JSON.parse(v):null; };
+const set = (k,v) => localStorage.setItem('gfm_'+k, JSON.stringify(v));
+
+function getData(k){ return get(k) ?? DEFAULTS[k]; }
+function saveData(k,v){ set(k,v); }
+function getCreds(){ return get('creds') ?? DEFAULTS.credentials; }
+
+function logActivity(type, text) {
+  const act = get('gfm_activity') || [];
+  act.unshift({ type, text, time: new Date().toLocaleTimeString() });
+  if (act.length > 20) act.pop();
+  set('gfm_activity', act);
+}
+
+// ════════════════════════════════════════════
+//  LOGIN / AUTH
+// ════════════════════════════════════════════
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const c = getCreds();
+  if (u === c.user && p === c.pass) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('shell').classList.add('visible');
+    initDashboard();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginPass').value = '';
+  }
+}
+
+function doLogout() {
+  document.getElementById('shell').classList.remove('visible');
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginError').style.display = 'none';
+}
+
+// ════════════════════════════════════════════
+//  NAVIGATION
+// ════════════════════════════════════════════
+let currentSection = 'dashboard';
+let galleryView = 'grid';
+
+function nav(name, el) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  if(el) el.classList.add('active');
+  document.getElementById('topbarSection').textContent = name.toUpperCase();
+  currentSection = name;
+  closeMobileSidebar();
+  if(name==='dashboard') initDashboard();
+  if(name==='gallery') renderGallerySection();
+  if(name==='videos') renderVideoSection();
+  if(name==='events') renderEventsTable();
+  if(name==='programs') renderProgramsTable();
+  if(name==='artists') renderArtistsGrid();
+  if(name==='settings') initSettings();
+}
+
+function openMobileSidebar() {
+  document.getElementById('sidebar').classList.add('mob-open');
+  document.getElementById('sidebarOverlay').classList.add('mob-open');
+}
+function closeMobileSidebar() {
+  document.getElementById('sidebar').classList.remove('mob-open');
+  document.getElementById('sidebarOverlay').classList.remove('mob-open');
+}
+
+// ════════════════════════════════════════════
+//  DASHBOARD
+// ════════════════════════════════════════════
+function initDashboard() {
+  const photos = getData('photos');
+  const videos = getData('videos');
+  const events = getData('events');
+  const artists = getData('artists');
+
+  document.getElementById('dash-photos').textContent = photos.length;
+  document.getElementById('dash-videos').textContent = videos.length;
+  document.getElementById('dash-events').textContent = events.length;
+  document.getElementById('dash-artists').textContent = artists.length;
+
+  // Sidebar badges
+  document.getElementById('sb-gallery-count').textContent = photos.length;
+  document.getElementById('sb-videos-count').textContent = videos.length;
+  document.getElementById('sb-events-count').textContent = events.length;
+
+  // Recent photos
+  const rp = document.getElementById('dash-recent-photos');
+  rp.innerHTML = photos.slice(0,8).map(p=>`
+    <div style="position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer;" onclick="nav('gallery')">
+      <img src="${p.url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.background='var(--card2)'"/>
+    </div>`).join('') || '<p style="color:var(--text2);font-size:.8rem;padding:10px;">No photos yet.</p>';
+
+  // Activity
+  const act = get('gfm_activity') || [];
+  const af = document.getElementById('activityFeed');
+  if(!act.length) {
+    af.innerHTML = '<div class="activity-item"><span style="color:var(--text2);font-size:.8rem;">No recent activity.</span></div>';
+  } else {
+    af.innerHTML = act.slice(0,8).map(a=>`
+      <div class="activity-item">
+        <div class="act-dot ${a.type}"></div>
+        <span class="act-text">${a.text}</span>
+        <span class="act-time">${a.time}</span>
+      </div>`).join('');
+  }
+}
+
+// ════════════════════════════════════════════
+//  GALLERY
+// ════════════════════════════════════════════
+function setGalleryView(v, btn) {
+  galleryView = v;
+  document.querySelectorAll('.vt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGallerySection();
+}
+
+function renderGallerySection(search='') {
+  const cat = document.getElementById('galleryFilterCat')?.value || '';
+  let photos = getData('photos');
+  if(cat) photos = photos.filter(p=>p.category===cat);
+  if(search) photos = photos.filter(p=>p.caption.toLowerCase().includes(search.toLowerCase()));
+
+  const wrap = document.getElementById('galleryContent');
+
+  if(!photos.length) {
+    wrap.innerHTML = '<div class="empty-state"><div class="es-icon">🖼️</div><p>No photos found.</p></div>';
+    return;
+  }
+
+  if(galleryView === 'grid') {
+    wrap.innerHTML = `<div class="photo-grid">${photos.map(p=>`
+      <div class="photo-card">
+        <img src="${p.url}" alt="${p.caption}" onerror="this.style.height='80px';this.style.background='var(--card2)'"/>
+        <div class="photo-card-info">
+          <p title="${p.caption}">${p.caption}</p>
+          <div style="margin-bottom:8px;"><span class="badge badge-orange">${p.category}</span></div>
+          <div class="photo-card-actions">
+            <button class="btn btn-outline btn-sm" onclick="editPhoto(${p.id})">✏ Edit</button>
+            <button class="btn btn-red btn-sm" onclick="confirmDelete('photo',${p.id},'${p.caption}')">🗑</button>
+          </div>
+        </div>
+      </div>`).join('')}</div>`;
+  } else {
+    wrap.innerHTML = `<div class="table-wrap"><table>
+      <thead><tr><th>Preview</th><th>Caption</th><th>Category</th><th>Actions</th></tr></thead>
+      <tbody>${photos.map(p=>`
+        <tr>
+          <td><img class="td-img" src="${p.url}" onerror="this.style.background='var(--card2)'"/></td>
+          <td>${p.caption}</td>
+          <td><span class="badge badge-orange">${p.category}</span></td>
+          <td style="display:flex;gap:6px;">
+            <button class="btn btn-outline btn-sm" onclick="editPhoto(${p.id})">✏ Edit</button>
+            <button class="btn btn-red btn-sm" onclick="confirmDelete('photo',${p.id},'${p.caption}')">🗑 Delete</button>
+          </td>
+        </tr>`).join('')}
+      </tbody></table></div>`;
+  }
+}
+
+function openAddPhotoModal() {
+  document.getElementById('photoModalTitle').textContent = 'Add New Photo';
+  document.getElementById('photoEditId').value = '';
+  document.getElementById('photoUrl').value = '';
+  document.getElementById('photoCaption').value = '';
+  document.getElementById('photoCat').value = 'performance';
+  document.getElementById('photoPreviewWrap').style.display = 'none';
+  openModal('photoModal');
+}
+
+function editPhoto(id) {
+  const p = getData('photos').find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('photoModalTitle').textContent = 'Edit Photo';
+  document.getElementById('photoEditId').value = id;
+  document.getElementById('photoUrl').value = p.url;
+  document.getElementById('photoCaption').value = p.caption;
+  document.getElementById('photoCat').value = p.category;
+  const pw = document.getElementById('photoPreviewWrap');
+  document.getElementById('photoPreview').src = p.url;
+  pw.style.display = 'block';
+  openModal('photoModal');
+}
+
+document.getElementById('photoUrl').addEventListener('input', function() {
+  const v = this.value.trim();
+  if(v) {
+    document.getElementById('photoPreview').src = v;
+    document.getElementById('photoPreviewWrap').style.display = 'block';
+  } else {
+    document.getElementById('photoPreviewWrap').style.display = 'none';
+  }
+});
+
+document.getElementById('videoYtId').addEventListener('input', function() {
+  const v = this.value.trim();
+  if(v) {
+    document.getElementById('videoThumbPreview').src = `https://img.youtube.com/vi/${v}/mqdefault.jpg`;
+    document.getElementById('videoPreviewWrap').style.display = 'block';
+  } else {
+    document.getElementById('videoPreviewWrap').style.display = 'none';
+  }
+});
+
+function savePhoto() {
+  const url = document.getElementById('photoUrl').value.trim();
+  const caption = document.getElementById('photoCaption').value.trim();
+  const category = document.getElementById('photoCat').value;
+  const editId = document.getElementById('photoEditId').value;
+  if(!url || !caption) { showToast('Please fill in URL and caption!','error'); return; }
+
+  let photos = getData('photos');
+  if(editId) {
+    photos = photos.map(p => p.id==editId ? {...p,url,caption,category} : p);
+    logActivity('', `Updated photo: <strong>${caption}</strong>`);
+    showToast('Photo updated!','success');
+  } else {
+    photos.push({id:Date.now(),url,caption,category});
+    logActivity('green', `Added photo: <strong>${caption}</strong>`);
+    showToast('Photo added!','success');
+  }
+  saveData('photos', photos);
+  closeModal('photoModal');
+  renderGallerySection();
+  updateBadges();
+}
+
+// ════════════════════════════════════════════
+//  VIDEOS
+// ════════════════════════════════════════════
+function renderVideoSection(search='') {
+  let vids = getData('videos');
+  if(search) vids = vids.filter(v=>v.title.toLowerCase().includes(search.toLowerCase())||v.tag.toLowerCase().includes(search.toLowerCase()));
+  const tb = document.getElementById('videosTableBody');
+  const em = document.getElementById('videosEmpty');
+  if(!vids.length) { tb.innerHTML=''; em.style.display='block'; return; }
+  em.style.display='none';
+  tb.innerHTML = vids.map(v=>`
+    <tr>
+      <td><img class="td-vid-thumb" src="https://img.youtube.com/vi/${v.ytId}/mqdefault.jpg" onerror="this.style.background='var(--card2)'"/></td>
+      <td><strong>${v.title}</strong></td>
+      <td style="max-width:200px;font-size:.78rem;color:var(--text2);">${v.desc||'—'}</td>
+      <td><span class="badge badge-blue">${v.tag}</span></td>
+      <td><code style="font-family:'DM Mono',monospace;font-size:.72rem;color:var(--saffron);">${v.ytId}</code></td>
+      <td style="display:flex;gap:6px;">
+        <button class="btn btn-outline btn-sm" onclick="editVideo(${v.id})">✏ Edit</button>
+        <button class="btn btn-red btn-sm" onclick="confirmDelete('video',${v.id},'${v.title}')">🗑 Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+function openAddVideoModal() {
+  document.getElementById('videoModalTitle').textContent = 'Add New Video';
+  document.getElementById('videoEditId').value = '';
+  document.getElementById('videoYtId').value = '';
+  document.getElementById('videoTitle').value = '';
+  document.getElementById('videoDesc').value = '';
+  document.getElementById('videoTag').value = '';
+  document.getElementById('videoPreviewWrap').style.display = 'none';
+  openModal('videoModal');
+}
+
+function editVideo(id) {
+  const v = getData('videos').find(x=>x.id===id);
+  if(!v) return;
+  document.getElementById('videoModalTitle').textContent = 'Edit Video';
+  document.getElementById('videoEditId').value = id;
+  document.getElementById('videoYtId').value = v.ytId;
+  document.getElementById('videoTitle').value = v.title;
+  document.getElementById('videoDesc').value = v.desc;
+  document.getElementById('videoTag').value = v.tag;
+  document.getElementById('videoThumbPreview').src = `https://img.youtube.com/vi/${v.ytId}/mqdefault.jpg`;
+  document.getElementById('videoPreviewWrap').style.display = 'block';
+  openModal('videoModal');
+}
+
+function saveVideo() {
+  const ytId = document.getElementById('videoYtId').value.trim();
+  const title = document.getElementById('videoTitle').value.trim();
+  const desc = document.getElementById('videoDesc').value.trim();
+  const tag = document.getElementById('videoTag').value.trim() || 'Performance';
+  const editId = document.getElementById('videoEditId').value;
+  if(!ytId || !title) { showToast('Please fill in YouTube ID and title!','error'); return; }
+
+  let vids = getData('videos');
+  if(editId) {
+    vids = vids.map(v => v.id==editId ? {...v,ytId,title,desc,tag} : v);
+    logActivity('blue', `Updated video: <strong>${title}</strong>`);
+    showToast('Video updated!','success');
+  } else {
+    vids.push({id:Date.now(),ytId,title,desc,tag});
+    logActivity('green', `Added video: <strong>${title}</strong>`);
+    showToast('Video added!','success');
+  }
+  saveData('videos', vids);
+  closeModal('videoModal');
+  renderVideoSection();
+  updateBadges();
+}
+
+// ════════════════════════════════════════════
+//  EVENTS
+// ════════════════════════════════════════════
+function renderEventsTable(search='') {
+  let evts = getData('events');
+  if(search) evts = evts.filter(e=>e.name.toLowerCase().includes(search.toLowerCase())||e.location.toLowerCase().includes(search.toLowerCase()));
+  evts.sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const tb = document.getElementById('eventsTableBody');
+  const em = document.getElementById('eventsEmpty');
+  if(!evts.length) { tb.innerHTML=''; em.style.display='block'; return; }
+  em.style.display='none';
+  const badgeClass = {upcoming:'badge-green',completed:'badge-gray',cancelled:'badge-red'};
+  tb.innerHTML = evts.map(e=>`
+    <tr>
+      <td><strong style="font-family:'DM Mono',monospace;">${formatDate(e.date)}</strong></td>
+      <td><strong>${e.name}</strong></td>
+      <td style="color:var(--text2);">📍 ${e.location||'—'}</td>
+      <td style="max-width:180px;font-size:.78rem;color:var(--text2);">${e.desc||'—'}</td>
+      <td><span class="badge ${badgeClass[e.status]||'badge-gray'}">${e.status}</span></td>
+      <td style="display:flex;gap:6px;">
+        <button class="btn btn-outline btn-sm" onclick="editEvent(${e.id})">✏ Edit</button>
+        <button class="btn btn-red btn-sm" onclick="confirmDelete('event',${e.id},'${e.name}')">🗑 Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+function formatDate(d) {
+  if(!d) return '—';
+  const dt = new Date(d+'T00:00:00');
+  return dt.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+}
+
+function openAddEventModal() {
+  document.getElementById('eventModalTitle').textContent = 'Add New Event';
+  document.getElementById('eventEditId').value = '';
+  document.getElementById('eventDate').value = '';
+  document.getElementById('eventName').value = '';
+  document.getElementById('eventLocation').value = '';
+  document.getElementById('eventDesc').value = '';
+  document.getElementById('eventStatus').value = 'upcoming';
+  openModal('eventModal');
+}
+
+function editEvent(id) {
+  const e = getData('events').find(x=>x.id===id);
+  if(!e) return;
+  document.getElementById('eventModalTitle').textContent = 'Edit Event';
+  document.getElementById('eventEditId').value = id;
+  document.getElementById('eventDate').value = e.date;
+  document.getElementById('eventName').value = e.name;
+  document.getElementById('eventLocation').value = e.location;
+  document.getElementById('eventDesc').value = e.desc;
+  document.getElementById('eventStatus').value = e.status;
+  openModal('eventModal');
+}
+
+function saveEvent() {
+  const date = document.getElementById('eventDate').value;
+  const name = document.getElementById('eventName').value.trim();
+  const location = document.getElementById('eventLocation').value.trim();
+  const desc = document.getElementById('eventDesc').value.trim();
+  const status = document.getElementById('eventStatus').value;
+  const editId = document.getElementById('eventEditId').value;
+  if(!date || !name) { showToast('Date and event name are required!','error'); return; }
+
+  let evts = getData('events');
+  if(editId) {
+    evts = evts.map(e => e.id==editId ? {...e,date,name,location,desc,status} : e);
+    logActivity('blue', `Updated event: <strong>${name}</strong>`);
+    showToast('Event updated!','success');
+  } else {
+    evts.push({id:Date.now(),date,name,location,desc,status});
+    logActivity('green', `Added event: <strong>${name}</strong>`);
+    showToast('Event added!','success');
+  }
+  saveData('events', evts);
+  closeModal('eventModal');
+  renderEventsTable();
+  updateBadges();
+}
+
+// ════════════════════════════════════════════
+//  PROGRAMS
+// ════════════════════════════════════════════
+function renderProgramsTable() {
+  const progs = getData('programs');
+  document.getElementById('programsTableBody').innerHTML = progs.map(p=>`
+    <tr>
+      <td style="font-size:1.5rem;">${p.icon}</td>
+      <td><strong>${p.name}</strong></td>
+      <td style="max-width:220px;font-size:.8rem;color:var(--text2);">${p.desc||'—'}</td>
+      <td><span class="badge badge-orange">${p.tag}</span></td>
+      <td style="display:flex;gap:6px;">
+        <button class="btn btn-outline btn-sm" onclick="editProgram(${p.id})">✏ Edit</button>
+        <button class="btn btn-red btn-sm" onclick="confirmDelete('program',${p.id},'${p.name}')">🗑 Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+function openAddProgramModal() {
+  document.getElementById('programModalTitle').textContent = 'Add Program';
+  document.getElementById('programEditId').value = '';
+  document.getElementById('programIcon').value = '🎵';
+  document.getElementById('programName').value = '';
+  document.getElementById('programDesc').value = '';
+  document.getElementById('programTag').value = '';
+  openModal('programModal');
+}
+
+function editProgram(id) {
+  const p = getData('programs').find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('programModalTitle').textContent = 'Edit Program';
+  document.getElementById('programEditId').value = id;
+  document.getElementById('programIcon').value = p.icon;
+  document.getElementById('programName').value = p.name;
+  document.getElementById('programDesc').value = p.desc;
+  document.getElementById('programTag').value = p.tag;
+  openModal('programModal');
+}
+
+function saveProgram() {
+  const icon = document.getElementById('programIcon').value.trim() || '🎵';
+  const name = document.getElementById('programName').value.trim();
+  const desc = document.getElementById('programDesc').value.trim();
+  const tag = document.getElementById('programTag').value.trim() || 'General';
+  const editId = document.getElementById('programEditId').value;
+  if(!name) { showToast('Program name is required!','error'); return; }
+
+  let progs = getData('programs');
+  if(editId) {
+    progs = progs.map(p => p.id==editId ? {...p,icon,name,desc,tag} : p);
+    showToast('Program updated!','success');
+  } else {
+    progs.push({id:Date.now(),icon,name,desc,tag});
+    showToast('Program added!','success');
+  }
+  saveData('programs', progs);
+  closeModal('programModal');
+  renderProgramsTable();
+}
+
+// ════════════════════════════════════════════
+//  ARTISTS
+// ════════════════════════════════════════════
+function renderArtistsGrid() {
+  const artists = getData('artists');
+  const grid = document.getElementById('artistsGrid');
+  if(!artists.length) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="es-icon">👥</div><p>No artists yet.</p></div>';
+    return;
+  }
+  grid.innerHTML = artists.map(a=>`
+    <div style="background:var(--card);border:1px solid var(--border);padding:24px 20px;text-align:center;border-top:2px solid var(--saffron);">
+      <div style="font-size:2.5rem;margin-bottom:10px;">${a.avatar}</div>
+      <strong style="display:block;color:var(--cream);font-size:.9rem;margin-bottom:4px;">${a.name}</strong>
+      <small style="color:var(--saffron);font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;">${a.role}</small>
+      ${a.bio?`<p style="margin-top:8px;font-size:.75rem;color:var(--text2);">${a.bio}</p>`:''}
+      <div style="display:flex;gap:6px;justify-content:center;margin-top:14px;">
+        <button class="btn btn-outline btn-sm" onclick="editArtist(${a.id})">✏ Edit</button>
+        <button class="btn btn-red btn-sm" onclick="confirmDelete('artist',${a.id},'${a.name}')">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function openAddArtistModal() {
+  document.getElementById('artistModalTitle').textContent = 'Add Artist';
+  document.getElementById('artistEditId').value = '';
+  document.getElementById('artistAvatar').value = '🎵';
+  document.getElementById('artistName').value = '';
+  document.getElementById('artistRole').value = '';
+  document.getElementById('artistBio').value = '';
+  openModal('artistModal');
+}
+
+function editArtist(id) {
+  const a = getData('artists').find(x=>x.id===id);
+  if(!a) return;
+  document.getElementById('artistModalTitle').textContent = 'Edit Artist';
+  document.getElementById('artistEditId').value = id;
+  document.getElementById('artistAvatar').value = a.avatar;
+  document.getElementById('artistName').value = a.name;
+  document.getElementById('artistRole').value = a.role;
+  document.getElementById('artistBio').value = a.bio||'';
+  openModal('artistModal');
+}
+
+function saveArtist() {
+  const avatar = document.getElementById('artistAvatar').value.trim() || '🎵';
+  const name = document.getElementById('artistName').value.trim();
+  const role = document.getElementById('artistRole').value.trim();
+  const bio = document.getElementById('artistBio').value.trim();
+  const editId = document.getElementById('artistEditId').value;
+  if(!name) { showToast('Artist name is required!','error'); return; }
+
+  let artists = getData('artists');
+  if(editId) {
+    artists = artists.map(a => a.id==editId ? {...a,avatar,name,role,bio} : a);
+    logActivity('blue', `Updated artist: <strong>${name}</strong>`);
+    showToast('Artist updated!','success');
+  } else {
+    artists.push({id:Date.now(),avatar,name,role,bio});
+    logActivity('green', `Added artist: <strong>${name}</strong>`);
+    showToast('Artist added!','success');
+  }
+  saveData('artists', artists);
+  closeModal('artistModal');
+  renderArtistsGrid();
+  initDashboard();
+}
+
+// ════════════════════════════════════════════
+//  SETTINGS
+// ════════════════════════════════════════════
+function initSettings() {
+  const s = getData('settings');
+  document.getElementById('set-sitename').value = s.sitename||'';
+  document.getElementById('set-tagline').value = s.tagline||'';
+  document.getElementById('set-email').value = s.email||'';
+  document.getElementById('set-phone').value = s.phone||'';
+  document.getElementById('set-address').value = s.address||'';
+  const photos = getData('photos'); const videos = getData('videos');
+  const events = getData('events'); const artists = getData('artists');
+  document.getElementById('set-photos').textContent = photos.length;
+  document.getElementById('set-vids').textContent = videos.length;
+  document.getElementById('set-evts').textContent = events.length;
+  document.getElementById('set-arts').textContent = artists.length;
+}
+
+function saveSettings() {
+  const s = {
+    sitename: document.getElementById('set-sitename').value.trim(),
+    tagline: document.getElementById('set-tagline').value.trim(),
+    email: document.getElementById('set-email').value.trim(),
+    phone: document.getElementById('set-phone').value.trim(),
+    address: document.getElementById('set-address').value.trim(),
+  };
+  saveData('settings', s);
+  logActivity('', 'Updated site settings');
+  showToast('Settings saved!','success');
+}
+
+function changePassword() {
+  const cur = document.getElementById('set-curpass').value;
+  const nw = document.getElementById('set-newpass').value;
+  const cf = document.getElementById('set-confpass').value;
+  const creds = getCreds();
+  if(cur !== creds.pass) { showToast('Current password is wrong!','error'); return; }
+  if(nw.length < 6) { showToast('New password must be at least 6 characters!','error'); return; }
+  if(nw !== cf) { showToast('Passwords do not match!','error'); return; }
+  set('creds', {user: creds.user, pass: nw});
+  document.getElementById('set-curpass').value = '';
+  document.getElementById('set-newpass').value = '';
+  document.getElementById('set-confpass').value = '';
+  logActivity('green', 'Password changed successfully');
+  showToast('Password updated!','success');
+}
+
+function exportData() {
+  const data = {
+    photos: getData('photos'),
+    videos: getData('videos'),
+    events: getData('events'),
+    programs: getData('programs'),
+    artists: getData('artists'),
+    settings: getData('settings'),
+    exportedAt: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'gunsarfolkmusic-data.json';
+  a.click();
+  showToast('Data exported!','success');
+}
+
+function confirmResetData() {
+  showConfirm('Reset All Data?','This will permanently delete all photos, videos, events, artists, and programs. This action cannot be undone.', ()=>{
+    ['gfm_photos','gfm_videos','gfm_events','gfm_programs','gfm_artists','gfm_settings','gfm_activity'].forEach(k=>localStorage.removeItem(k));
+    closeModal('confirmModal');
+    showToast('All data reset to defaults.','error');
+    initDashboard(); initSettings();
+  });
+}
+
+// ════════════════════════════════════════════
+//  CONFIRM DELETE
+// ════════════════════════════════════════════
+function confirmDelete(type, id, name) {
+  showConfirm(`Delete ${type}?`, `"${name}" will be permanently deleted.`, ()=>{
+    deleteItem(type, id, name);
+    closeModal('confirmModal');
+  });
+}
+
+function deleteItem(type, id, name) {
+  const map = { photo:'photos', video:'videos', event:'events', program:'programs', artist:'artists' };
+  const key = map[type];
+  if(!key) return;
+  let items = getData(key).filter(x=>x.id!=id);
+  saveData(key, items);
+  logActivity('red', `Deleted ${type}: <strong>${name}</strong>`);
+  showToast(`${type.charAt(0).toUpperCase()+type.slice(1)} deleted.`,'error');
+  if(currentSection==='gallery') renderGallerySection();
+  if(currentSection==='videos') renderVideoSection();
+  if(currentSection==='events') renderEventsTable();
+  if(currentSection==='programs') renderProgramsTable();
+  if(currentSection==='artists') renderArtistsGrid();
+  updateBadges();
+  initDashboard();
+}
+
+function showConfirm(title, msg, onConfirm) {
+  document.getElementById('confirmTitle').textContent = title;
+  document.getElementById('confirmMsg').textContent = msg;
+  const btn = document.getElementById('confirmOkBtn');
+  btn.onclick = onConfirm;
+  openModal('confirmModal');
+}
+
+// ════════════════════════════════════════════
+//  MODAL HELPERS
+// ════════════════════════════════════════════
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); });
+});
+
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape') document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));
+});
+
+// ════════════════════════════════════════════
+//  BADGE COUNTS
+// ════════════════════════════════════════════
+function updateBadges() {
+  document.getElementById('sb-gallery-count').textContent = getData('photos').length;
+  document.getElementById('sb-videos-count').textContent = getData('videos').length;
+  document.getElementById('sb-events-count').textContent = getData('events').length;
+}
+
+// ════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════
+function showToast(msg, type='') {
+  const tc = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = `toast ${type?'toast-'+type:''}`;
+  t.innerHTML = `<span>${type==='success'?'✓':type==='error'?'✕':'ℹ'}</span> ${msg}`;
+  tc.appendChild(t);
+  setTimeout(()=>t.remove(), 3000);
+}
+
+// ════════════════════════════════════════════
+//  LIVE CLOCK
+// ════════════════════════════════════════════
+function updateClock() {
+  document.getElementById('liveClock').textContent = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════
+updateBadges();
+</script>
+</body>
+</html>
